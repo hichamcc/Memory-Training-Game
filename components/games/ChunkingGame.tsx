@@ -234,26 +234,26 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
         </p>
 
         <form onSubmit={handleSubmitAnswer} className="mb-6">
-          <div className="bg-gradient-to-br from-white to-blue-50 rounded-3xl p-8 shadow-xl border-2 border-blue-200 mb-6">
-            <label className="block text-gray-700 font-bold mb-4 text-lg">
+          <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-xl border-2 border-blue-200 mb-6">
+            <label className="block text-gray-700 font-bold mb-4 text-base md:text-lg">
               Enter the {sequenceLength}-digit sequence:
             </label>
             <input
               type="text"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
-              className="w-full px-8 py-6 rounded-full border-3 border-purple-300 focus:border-purple-500 focus:outline-none text-2xl font-black text-center shadow-lg bg-white tracking-widest"
+              className="w-full px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-full border-3 border-purple-300 focus:border-purple-500 focus:outline-none text-lg sm:text-xl md:text-2xl font-black text-center shadow-lg bg-white tracking-widest"
               placeholder="123 456 789"
               autoFocus
             />
-            <p className="text-gray-600 text-sm mt-4 text-center">
+            <p className="text-gray-600 text-xs sm:text-sm mt-4 text-center">
               Type {sequenceLength} digits (spaces and dashes are optional)
             </p>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl"
+            className="w-full bg-gradient-to-r from-orange-600 to-pink-600 text-white px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 md:py-5 rounded-full font-black text-base sm:text-lg md:text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl"
           >
             ✓ Submit Answer
           </button>

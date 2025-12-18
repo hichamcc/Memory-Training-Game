@@ -229,18 +229,18 @@ export default function LinkingGame({ difficulty, onComplete }: LinkingGameProps
         </div>
 
         <form onSubmit={handleSubmitAnswer} className="mb-6">
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <input
               type="text"
               value={currentInput}
               onChange={(e) => setCurrentInput(e.target.value)}
-              className="flex-1 px-8 py-5 rounded-full border-3 border-purple-300 focus:border-purple-500 focus:outline-none text-lg font-bold shadow-lg bg-white"
+              className="flex-1 px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 rounded-full border-3 border-purple-300 focus:border-purple-500 focus:outline-none text-base sm:text-lg font-bold shadow-lg bg-white"
               placeholder={`Word ${userAnswers.length + 1}... 💭`}
               autoFocus
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-10 py-5 rounded-full font-black hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-xl"
+              className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-5 sm:px-7 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-black text-sm sm:text-base hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-xl whitespace-nowrap"
             >
               ✓ Submit
             </button>

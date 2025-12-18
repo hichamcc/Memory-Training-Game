@@ -35,54 +35,54 @@ export default async function TacticDetailPage({
         </Link>
 
         {/* Header */}
-        <div className="bg-white/95 backdrop-blur rounded-3xl p-10 shadow-2xl border-2 border-white/50 mb-8 relative overflow-hidden">
+        <div className="bg-white/95 backdrop-blur rounded-2xl md:rounded-3xl p-6 md:p-10 shadow-2xl border-2 border-white/50 mb-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange-200 to-pink-200 rounded-full blur-3xl opacity-30"></div>
 
           <div className="relative z-10">
-            <div className="flex items-start justify-between mb-6">
-              <div className="flex items-center gap-6">
-                <div className="text-7xl animate-float">{tactic.icon}</div>
-                <div>
-                  <h1 className="text-5xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-3">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+              <div className="flex items-center gap-4 md:gap-6">
+                <div className="text-5xl md:text-7xl animate-float flex-shrink-0">{tactic.icon}</div>
+                <div className="min-w-0 flex-1">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-2 md:mb-3 break-words">
                     {tactic.name}
                   </h1>
-                  <p className="text-lg text-gray-700 font-medium">
+                  <p className="text-sm sm:text-base md:text-lg text-gray-700 font-medium break-words">
                     {tactic.shortDescription}
                   </p>
                 </div>
               </div>
-              <span className={`px-5 py-2.5 rounded-full text-sm font-bold border-2 ${difficultyColors[tactic.difficulty]} shadow-lg`}>
+              <span className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs sm:text-sm font-bold border-2 ${difficultyColors[tactic.difficulty]} shadow-lg self-start md:flex-shrink-0`}>
                 {tactic.difficulty}
               </span>
             </div>
 
-            <div className="mt-6 flex items-center text-gray-700 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-full px-5 py-3 w-fit border-2 border-yellow-200">
-              <svg className="w-5 h-5 mr-2 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+            <div className="mt-6 flex items-center text-gray-700 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-full px-4 md:px-5 py-2.5 md:py-3 w-full md:w-fit border-2 border-yellow-200">
+              <svg className="w-4 h-4 md:w-5 md:h-5 mr-2 text-orange-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
-              <span className="font-bold">Perfect for: {tactic.bestFor}</span>
+              <span className="font-bold text-sm md:text-base break-words">Perfect for: {tactic.bestFor}</span>
             </div>
           </div>
         </div>
 
         {/* Practice Button - Moved to Top */}
-        <div className="relative bg-gradient-to-r from-orange-600 via-pink-600 to-red-600 rounded-2xl p-6 shadow-xl text-white text-center overflow-hidden mb-8">
+        <div className="relative bg-gradient-to-r from-orange-600 via-pink-600 to-red-600 rounded-2xl p-5 md:p-6 shadow-xl text-white text-center overflow-hidden mb-8">
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-transparent"></div>
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
 
           <div className="relative z-10">
-            <div className="text-4xl mb-3 animate-float">🎮</div>
-            <h2 className="text-2xl font-black mb-2">Ready to Level Up?</h2>
-            <p className="text-white/90 text-sm mb-1 max-w-2xl mx-auto font-medium">
+            <div className="text-3xl md:text-4xl mb-3 animate-float">🎮</div>
+            <h2 className="text-xl md:text-2xl font-black mb-2">Ready to Level Up?</h2>
+            <p className="text-white/90 text-xs sm:text-sm mb-1 max-w-2xl mx-auto font-medium px-2">
               Time to put your skills to the test! Play the game and see how much you can remember! 🧠✨
             </p>
-            <p className="text-yellow-300 text-xs mb-5 font-semibold">
+            <p className="text-yellow-300 text-xs mb-4 md:mb-5 font-semibold px-2">
               ⚠️ Read the tips and instructions below first for best results!
             </p>
             <Link
               href={`/tactics/${tactic.id}/practice`}
-              className="inline-block bg-white text-orange-600 px-8 py-3 rounded-full font-black text-lg hover:bg-yellow-300 hover:text-orange-700 transition-all transform hover:scale-110 shadow-xl animate-pulse-glow"
+              className="inline-block bg-white text-orange-600 px-6 md:px-8 py-2.5 md:py-3 rounded-full font-black text-base md:text-lg hover:bg-yellow-300 hover:text-orange-700 transition-all transform hover:scale-110 shadow-xl animate-pulse-glow"
             >
               🚀 Start the Challenge!
             </Link>

@@ -346,7 +346,7 @@ export default function MajorSystemGame({ difficulty, onComplete }: MajorSystemG
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-4 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl"
+              className="w-full bg-gradient-to-r from-orange-600 to-pink-600 text-white px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 md:py-4 rounded-full font-black text-base sm:text-lg md:text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl"
             >
               ✓ Submit Word
             </button>
