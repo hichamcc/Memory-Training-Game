@@ -266,18 +266,18 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
         <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-12 shadow-2xl border-4 border-purple-300 mb-8">
           <div className="text-sm font-bold text-gray-700 mb-4">Remember this scene:</div>
 
-          <div className="bg-white/90 backdrop-blur rounded-3xl p-8 mb-6">
-            <div className="text-5xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-6">
+          <div className="bg-white/90 backdrop-blur rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 mb-6">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-4 md:mb-6 break-words px-2">
               {paoComponents.person} {paoComponents.action} {paoComponents.object}!
             </div>
-            <div className="text-gray-600 text-lg">
+            <div className="text-gray-600 text-sm sm:text-base md:text-lg">
               Create a clear mental picture of this scene!
             </div>
           </div>
 
-          <div className="bg-blue-100 rounded-2xl p-6 mb-6">
-            <div className="text-sm font-bold text-gray-700 mb-2">This represents:</div>
-            <div className="text-6xl font-black text-blue-600 tracking-widest">
+          <div className="bg-blue-100 rounded-2xl p-4 sm:p-6 mb-6">
+            <div className="text-xs sm:text-sm font-bold text-gray-700 mb-2">This represents:</div>
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-blue-600 tracking-widest break-all">
               {targetSequence}
             </div>
           </div>
@@ -344,26 +344,26 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
 
     return (
       <div className="max-w-2xl mx-auto text-center relative z-10">
-        <div className="text-7xl mb-6 animate-float">
+        <div className="text-5xl sm:text-6xl md:text-7xl mb-6 animate-float">
           {isGreat ? '🎉' : isGood ? '👏' : '💪'}
         </div>
-        <h2 className="text-5xl font-black text-gray-900 mb-2">
-          <span className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-2 px-4">
+          <span className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent break-words">
             {isGreat ? 'Amazing!' : isGood ? 'Great Work!' : 'Keep Going!'}
           </span>
         </h2>
-        <p className="text-gray-700 text-lg mb-8 font-semibold">
+        <p className="text-gray-700 text-base sm:text-lg mb-8 font-semibold px-4">
           You got {correctRounds} out of {totalRounds} rounds correct!
         </p>
 
-        <div className="grid grid-cols-2 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-8 shadow-xl border-3 border-purple-300 transform hover:scale-105 transition-transform">
-            <div className="text-6xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">{score}</div>
-            <div className="text-gray-800 font-bold text-lg">🎯 Score</div>
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-8">
+          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl border-3 border-purple-300 transform hover:scale-105 transition-transform">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">{score}</div>
+            <div className="text-gray-800 font-bold text-sm sm:text-base md:text-lg">🎯 Score</div>
           </div>
-          <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl p-8 shadow-xl border-3 border-green-300 transform hover:scale-105 transition-transform">
-            <div className="text-6xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">{accuracy}%</div>
-            <div className="text-gray-800 font-bold text-lg">✓ Accuracy</div>
+          <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl border-3 border-green-300 transform hover:scale-105 transition-transform">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">{accuracy}%</div>
+            <div className="text-gray-800 font-bold text-sm sm:text-base md:text-lg">✓ Accuracy</div>
           </div>
         </div>
 

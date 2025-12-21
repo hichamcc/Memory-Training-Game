@@ -171,12 +171,12 @@ export default function LinkingGame({ difficulty, onComplete }: LinkingGameProps
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-3xl p-16 shadow-2xl border-4 border-yellow-300 mb-8 transform hover:scale-105 transition-transform">
-          <div className="text-7xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6 animate-pulse">
+        <div className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-2xl md:rounded-3xl p-8 sm:p-12 md:p-16 shadow-2xl border-4 border-yellow-300 mb-8 transform hover:scale-105 transition-transform">
+          <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6 animate-pulse break-words px-2">
             {words[currentWordIndex]}
           </div>
-          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-8 py-4">
-            <div className="text-5xl font-black animate-pulse">
+          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-6 sm:px-8 py-3 sm:py-4">
+            <div className="text-4xl sm:text-5xl font-black animate-pulse">
               {timeLeft}
             </div>
           </div>

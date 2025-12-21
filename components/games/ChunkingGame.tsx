@@ -178,15 +178,15 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-3xl p-12 shadow-2xl border-4 border-yellow-300 mb-8">
+        <div className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-4 border-yellow-300 mb-8">
           <div className="mb-8">
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
               {chunks.map((chunk, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl px-8 py-6 shadow-xl transform hover:scale-110 transition-transform"
+                  className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl sm:rounded-2xl px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 shadow-xl transform hover:scale-110 transition-transform"
                 >
-                  <div className="text-5xl font-black tracking-wider">
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-black tracking-wider">
                     {chunk}
                   </div>
                 </div>
@@ -194,8 +194,8 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
             </div>
           </div>
 
-          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-8 py-4">
-            <div className="text-5xl font-black animate-pulse">
+          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-6 sm:px-8 py-3 sm:py-4">
+            <div className="text-4xl sm:text-5xl font-black animate-pulse">
               {timeLeft}
             </div>
           </div>

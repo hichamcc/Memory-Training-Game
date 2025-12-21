@@ -194,18 +194,18 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
           </div>
         </div>
 
-        <div className={`bg-gradient-to-br ${currentLocation.color} rounded-3xl p-12 shadow-2xl border-4 border-white/50 mb-8 transform hover:scale-105 transition-transform`}>
-          <div className="text-7xl mb-4">{currentLocation.icon}</div>
-          <div className="text-3xl font-black text-white mb-6 drop-shadow-lg">
+        <div className={`bg-gradient-to-br ${currentLocation.color} rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-4 border-white/50 mb-8 transform hover:scale-105 transition-transform`}>
+          <div className="text-5xl sm:text-6xl md:text-7xl mb-4">{currentLocation.icon}</div>
+          <div className="text-xl sm:text-2xl md:text-3xl font-black text-white mb-6 drop-shadow-lg break-words px-2">
             {currentLocation.name}
           </div>
-          <div className="bg-white/90 backdrop-blur rounded-2xl p-8 mb-6">
-            <div className="text-6xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-4 animate-pulse">
+          <div className="bg-white/90 backdrop-blur rounded-2xl p-4 sm:p-6 md:p-8 mb-6">
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-4 animate-pulse break-words px-2">
               {currentWord}
             </div>
           </div>
-          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-8 py-4">
-            <div className="text-5xl font-black animate-pulse">
+          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-6 sm:px-8 py-3 sm:py-4">
+            <div className="text-4xl sm:text-5xl font-black animate-pulse">
               {timeLeft}
             </div>
           </div>
