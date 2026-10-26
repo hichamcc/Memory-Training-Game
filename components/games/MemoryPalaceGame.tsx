@@ -15,12 +15,12 @@ const PALACE_LOCATIONS = [
   { id: 1, name: 'Front Door', icon: '🚪', color: 'from-blue-400 to-blue-600' },
   { id: 2, name: 'Living Room', icon: '🛋️', color: 'from-green-400 to-green-600' },
   { id: 3, name: 'Kitchen', icon: '🍳', color: 'from-yellow-400 to-yellow-600' },
-  { id: 4, name: 'Bedroom', icon: '🛏️', color: 'from-purple-400 to-purple-600' },
-  { id: 5, name: 'Bathroom', icon: '🚿', color: 'from-pink-400 to-pink-600' },
+  { id: 4, name: 'Bedroom', icon: '🛏️', color: 'from-lime-400 to-lime-600' },
+  { id: 5, name: 'Bathroom', icon: '🚿', color: 'from-rose-400 to-rose-600' },
   { id: 6, name: 'Study Room', icon: '📚', color: 'from-orange-400 to-orange-600' },
   { id: 7, name: 'Dining Room', icon: '🍽️', color: 'from-red-400 to-red-600' },
   { id: 8, name: 'Garden', icon: '🌻', color: 'from-teal-400 to-teal-600' },
-  { id: 9, name: 'Garage', icon: '🚗', color: 'from-indigo-400 to-indigo-600' },
+  { id: 9, name: 'Garage', icon: '🚗', color: 'from-sky-400 to-sky-600' },
   { id: 10, name: 'Balcony', icon: '🌆', color: 'from-cyan-400 to-cyan-600' },
   { id: 11, name: 'Attic', icon: '📦', color: 'from-amber-400 to-amber-600' },
   { id: 12, name: 'Basement', icon: '🔦', color: 'from-slate-400 to-slate-600' },
@@ -143,32 +143,32 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
     return (
       <div className="text-center relative z-10">
         <div className="text-6xl mb-6 animate-float">🏛️</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-4">
-          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <span className="text-blue-600">
             Memory Palace
           </span>
         </h2>
         <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto font-medium">
           Place each word in a specific room of your house. Walk through your palace to remember! 🏠
         </p>
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto border-2 border-blue-200 shadow-lg">
-          <div className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-black mb-4">
+        <div className="bg-slate-50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto border-2 border-blue-200 shadow-lg">
+          <div className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-bold mb-4">
             {difficulty} Mode
           </div>
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-white/60 backdrop-blur rounded-xl p-4">
-              <div className="text-3xl font-black text-purple-600 mb-1">{itemCount}</div>
+              <div className="text-3xl font-bold text-blue-600 mb-1">{itemCount}</div>
               <div className="text-gray-700 font-semibold text-sm">Locations</div>
             </div>
             <div className="bg-white/60 backdrop-blur rounded-xl p-4">
-              <div className="text-3xl font-black text-blue-600 mb-1">{memorizeTime}s</div>
+              <div className="text-3xl font-bold text-blue-600 mb-1">{memorizeTime}s</div>
               <div className="text-gray-700 font-semibold text-sm">Time per Item</div>
             </div>
           </div>
         </div>
         <button
           onClick={startGame}
-          className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+          className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
         >
           🚀 Enter Your Palace!
         </button>
@@ -186,32 +186,32 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
           <div className="text-sm font-bold text-gray-700 mb-3 bg-white/60 backdrop-blur rounded-full px-4 py-2 inline-block">
             Location {currentLocationIndex + 1} of {words.length} 🏠
           </div>
-          <div className="w-full bg-gradient-to-r from-gray-200 to-gray-300 rounded-full h-3 mb-4 overflow-hidden shadow-inner">
+          <div className="w-full bg-slate-100 rounded-full h-3 mb-4 overflow-hidden shadow-inner">
             <div
-              className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-3 rounded-full transition-all duration-300 shadow-lg"
+              className="bg-blue-600 h-3 rounded-full transition-all duration-300 shadow-lg"
               style={{ width: `${((currentLocationIndex + 1) / words.length) * 100}%` }}
             />
           </div>
         </div>
 
-        <div className={`bg-gradient-to-br ${currentLocation.color} rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-4 border-white/50 mb-8 transform hover:scale-105 transition-transform`}>
+        <div className={`bg-gradient-to-br ${currentLocation.color} rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 shadow-sm border-2 border-white/50 mb-8 transition-transform`}>
           <div className="text-5xl sm:text-6xl md:text-7xl mb-4">{currentLocation.icon}</div>
-          <div className="text-xl sm:text-2xl md:text-3xl font-black text-white mb-6 drop-shadow-lg break-words px-2">
+          <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 drop-shadow-lg break-words px-2">
             {currentLocation.name}
           </div>
           <div className="bg-white/90 backdrop-blur rounded-2xl p-4 sm:p-6 md:p-8 mb-6">
-            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-4 animate-pulse break-words px-2">
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-600 mb-4 break-words px-2">
               {currentWord}
             </div>
           </div>
-          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-6 sm:px-8 py-3 sm:py-4">
-            <div className="text-4xl sm:text-5xl font-black animate-pulse">
+          <div className="inline-block bg-slate-900 text-white rounded-full px-6 sm:px-8 py-3 sm:py-4">
+            <div className="text-4xl sm:text-5xl font-bold">
               {timeLeft}
             </div>
           </div>
         </div>
 
-        <div className="bg-white/60 backdrop-blur rounded-2xl p-6 max-w-2xl mx-auto border-2 border-purple-200">
+        <div className="bg-white/60 backdrop-blur rounded-2xl p-6 max-w-2xl mx-auto border-2 border-slate-200">
           <p className="text-gray-800 font-bold text-lg">
             ✨ Imagine "{currentWord}" in the {currentLocation.name}! ✨
           </p>
@@ -227,13 +227,13 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
     return (
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-6xl mb-6 text-center animate-float">🚶</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-6 text-center">
-          <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">
+          <span className="text-emerald-600">
             Walk Through Your Palace!
           </span>
         </h2>
-        <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-full px-6 py-3 mb-8 text-center border-2 border-green-300">
-          <p className="text-gray-800 font-black text-lg">
+        <div className="bg-emerald-50 rounded-full px-6 py-3 mb-8 text-center border-2 border-green-300">
+          <p className="text-gray-800 font-bold text-lg">
             {Object.keys(userAnswers).length} / {words.length} locations recalled! 🎯
           </p>
         </div>
@@ -248,18 +248,18 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
                 key={location.id}
                 onClick={() => handleLocationClick(location.id)}
                 disabled={isAnswered}
-                className={`p-6 rounded-2xl border-3 transition-all transform ${
+                className={`p-6 rounded-2xl border-2 transition-all transform ${
                   isAnswered
-                    ? 'bg-gradient-to-br from-green-100 to-emerald-100 border-green-400 cursor-default opacity-75'
+                    ? 'bg-emerald-50 border-green-400 cursor-default opacity-75'
                     : isSelected
-                    ? `bg-gradient-to-br ${location.color} border-white scale-105 shadow-xl`
-                    : `bg-white border-gray-300 hover:scale-105 hover:border-orange-400 hover:shadow-lg`
+                    ? `bg-gradient-to-br ${location.color} border-white scale-105 shadow-sm`
+                    : `bg-white border-gray-300 hover:border-orange-400 hover:shadow-lg`
                 }`}
               >
                 <div className={`text-5xl mb-3 ${isSelected ? 'animate-bounce' : ''}`}>
                   {location.icon}
                 </div>
-                <div className={`font-black text-sm ${isAnswered ? 'text-green-700' : isSelected ? 'text-white' : 'text-gray-900'}`}>
+                <div className={`font-bold text-sm ${isAnswered ? 'text-green-700' : isSelected ? 'text-white' : 'text-gray-900'}`}>
                   {location.name}
                 </div>
                 {isAnswered && (
@@ -271,10 +271,10 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
         </div>
 
         {selectedLocation !== null && (
-          <div className="bg-gradient-to-br from-white to-orange-50 rounded-3xl p-8 shadow-xl border-2 border-orange-200">
+          <div className="bg-white rounded-3xl p-8 shadow-sm border-2 border-orange-200">
             <div className="flex items-center gap-4 mb-4">
               <div className="text-5xl">{locations.find(l => l.id === selectedLocation)?.icon}</div>
-              <h3 className="text-2xl font-black text-gray-900">
+              <h3 className="text-2xl font-bold text-gray-900">
                 What's in the {locations.find(l => l.id === selectedLocation)?.name}?
               </h3>
             </div>
@@ -287,13 +287,13 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
               <div className="flex gap-2 sm:gap-3">
                 <input
                   type="text"
-                  className="flex-1 px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 rounded-full border-3 border-orange-300 focus:border-orange-500 focus:outline-none text-base sm:text-lg font-bold shadow-lg bg-white"
+                  className="flex-1 px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 rounded-full border-2 border-orange-300 focus:border-orange-500 focus:outline-none text-base sm:text-lg font-bold shadow-lg bg-white"
                   placeholder="Type the word... 💭"
                   autoFocus
                 />
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-5 sm:px-7 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-black text-sm sm:text-base hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-xl whitespace-nowrap"
+                  className="bg-blue-600 text-white px-5 sm:px-7 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-bold text-sm sm:text-base hover:bg-blue-700 transition-all shadow-sm whitespace-nowrap"
                 >
                   ✓ Submit
                 </button>
@@ -322,8 +322,8 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
         <div className="text-7xl mb-6 animate-float">
           {isGreat ? '🎉' : isGood ? '👏' : '💪'}
         </div>
-        <h2 className="text-5xl font-black text-gray-900 mb-2">
-          <span className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
+        <h2 className="text-5xl font-bold text-gray-900 mb-2">
+          <span className="text-slate-900">
             {isGreat ? 'Amazing!' : isGood ? 'Well Done!' : 'Keep Trying!'}
           </span>
         </h2>
@@ -332,35 +332,35 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
         </p>
 
         <div className="grid grid-cols-2 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-8 shadow-xl border-3 border-purple-300 transform hover:scale-105 transition-transform">
-            <div className="text-6xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">{score}</div>
+          <div className="bg-blue-50 rounded-3xl p-8 shadow-sm border-2 border-blue-300 transition-transform">
+            <div className="text-6xl font-bold text-blue-600 mb-3">{score}</div>
             <div className="text-gray-800 font-bold text-lg">🎯 Score</div>
           </div>
-          <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl p-8 shadow-xl border-3 border-green-300 transform hover:scale-105 transition-transform">
-            <div className="text-6xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">{accuracy}%</div>
+          <div className="bg-emerald-50 rounded-3xl p-8 shadow-sm border-2 border-green-300 transition-transform">
+            <div className="text-6xl font-bold text-emerald-600 mb-3">{accuracy}%</div>
             <div className="text-gray-800 font-bold text-lg">✓ Accuracy</div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-white to-blue-50 rounded-3xl p-8 shadow-xl border-2 border-blue-200 mb-8 text-left">
+        <div className="bg-white rounded-3xl p-8 shadow-sm border-2 border-blue-200 mb-8 text-left">
           <div className="flex items-center gap-3 mb-6 justify-center">
             <span className="text-3xl">📊</span>
-            <h3 className="font-black text-gray-900 text-2xl">Your Palace Journey</h3>
+            <h3 className="font-bold text-gray-900 text-2xl">Your Palace Journey</h3>
           </div>
           <div className="space-y-3">
             {results.map((result, index) => (
               <div
                 key={index}
-                className={`flex items-center gap-4 p-5 rounded-2xl shadow-md border-2 transform hover:scale-105 transition-transform ${
+                className={`flex items-center gap-4 p-5 rounded-2xl shadow-md border-2 transition-transform ${
                   result.correct
-                    ? 'bg-gradient-to-r from-green-100 to-emerald-100 border-green-300'
-                    : 'bg-gradient-to-r from-red-100 to-pink-100 border-red-300'
+                    ? 'bg-emerald-50 border-green-300'
+                    : 'bg-red-50 border-red-300'
                 }`}
               >
                 <div className="text-4xl">{result.icon}</div>
                 <div className="flex-1">
                   <div className="text-sm font-bold text-gray-600">{result.location}</div>
-                  <div className="text-gray-900 font-black text-lg">{result.word}</div>
+                  <div className="text-gray-900 font-bold text-lg">{result.word}</div>
                   {!result.correct && (
                     <div className="text-sm text-red-700 font-semibold mt-1">
                       You wrote: {result.userAnswer || '(nothing)'}
@@ -380,7 +380,7 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
         <div className="flex gap-4 justify-center">
           <button
             onClick={resetGame}
-            className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+            className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
           >
             🔄 Visit Again!
           </button>

@@ -141,32 +141,32 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
     return (
       <div className="text-center relative z-10">
         <div className="text-6xl mb-6 animate-float">👥</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-4">
-          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <span className="text-blue-600">
             Face-Name Match
           </span>
         </h2>
         <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto font-medium">
           Link facial features to names! Perfect for networking events! 👤
         </p>
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto border-2 border-blue-200 shadow-lg">
-          <div className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-black mb-4">
+        <div className="bg-slate-50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto border-2 border-blue-200 shadow-lg">
+          <div className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-bold mb-4">
             {difficulty} Mode
           </div>
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-white/60 backdrop-blur rounded-xl p-4">
-              <div className="text-3xl font-black text-purple-600 mb-1">{peopleCount}</div>
+              <div className="text-3xl font-bold text-blue-600 mb-1">{peopleCount}</div>
               <div className="text-gray-700 font-semibold text-sm">People to Meet</div>
             </div>
             <div className="bg-white/60 backdrop-blur rounded-xl p-4">
-              <div className="text-3xl font-black text-blue-600 mb-1">{memorizeTime}s</div>
+              <div className="text-3xl font-bold text-blue-600 mb-1">{memorizeTime}s</div>
               <div className="text-gray-700 font-semibold text-sm">Time per Person</div>
             </div>
           </div>
         </div>
         <button
           onClick={startGame}
-          className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+          className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
         >
           🤝 Meet the People!
         </button>
@@ -183,16 +183,16 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
           <div className="text-sm font-bold text-gray-700 mb-3 bg-white/60 backdrop-blur rounded-full px-4 py-2 inline-block">
             Person {currentPersonIndex + 1} of {people.length} 👤
           </div>
-          <div className="w-full bg-gradient-to-r from-gray-200 to-gray-300 rounded-full h-3 mb-4 overflow-hidden shadow-inner">
+          <div className="w-full bg-slate-100 rounded-full h-3 mb-4 overflow-hidden shadow-inner">
             <div
-              className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-3 rounded-full transition-all duration-300 shadow-lg"
+              className="bg-blue-600 h-3 rounded-full transition-all duration-300 shadow-lg"
               style={{ width: `${((currentPersonIndex + 1) / people.length) * 100}%` }}
             />
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-3xl p-12 shadow-2xl border-4 border-blue-300 mb-8">
-          <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl ring-4 ring-white">
+        <div className="bg-blue-50 rounded-3xl p-12 shadow-sm border-2 border-blue-300 mb-8">
+          <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden shadow-sm ring-4 ring-white">
             <img
               src={currentPerson.imageUrl}
               alt={currentPerson.name}
@@ -204,27 +204,27 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
           </div>
 
           <div className="mb-6">
-            <div className="text-5xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-3 animate-pulse">
+            <div className="text-5xl font-bold text-blue-600 mb-3">
               {currentPerson.name}
             </div>
             <div className="bg-white/80 backdrop-blur rounded-2xl px-8 py-4 inline-block">
               <div className="text-xl font-bold text-gray-700 mb-1">
                 Distinctive Feature:
               </div>
-              <div className="text-2xl font-black text-blue-600">
+              <div className="text-2xl font-bold text-blue-600">
                 {currentPerson.feature}
               </div>
             </div>
           </div>
 
-          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-8 py-4">
-            <div className="text-5xl font-black animate-pulse">
+          <div className="inline-block bg-slate-900 text-white rounded-full px-8 py-4">
+            <div className="text-5xl font-bold">
               {timeLeft}
             </div>
           </div>
         </div>
 
-        <div className="bg-white/60 backdrop-blur rounded-2xl p-6 max-w-2xl mx-auto border-2 border-purple-200">
+        <div className="bg-white/60 backdrop-blur rounded-2xl p-6 max-w-2xl mx-auto border-2 border-slate-200">
           <p className="text-gray-800 font-bold text-lg">
             ✨ Link {currentPerson.name}'s name to their {currentPerson.feature}! ✨
           </p>
@@ -240,13 +240,13 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
     return (
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-6xl mb-6 text-center animate-float">🎭</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-6 text-center">
-          <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">
+          <span className="text-emerald-600">
             Who's Who?
           </span>
         </h2>
-        <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-full px-6 py-3 mb-8 text-center border-2 border-green-300">
-          <p className="text-gray-800 font-black text-lg">
+        <div className="bg-emerald-50 rounded-full px-6 py-3 mb-8 text-center border-2 border-green-300">
+          <p className="text-gray-800 font-bold text-lg">
             {Object.keys(userAnswers).length} / {people.length} names remembered! 🎯
           </p>
         </div>
@@ -258,9 +258,9 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
             return (
               <div
                 key={person.id}
-                className={`rounded-2xl p-6 border-3 shadow-xl ${
+                className={`rounded-2xl p-6 border-2 shadow-sm ${
                   hasAnswered
-                    ? 'bg-gradient-to-br from-green-100 to-emerald-100 border-green-400'
+                    ? 'bg-emerald-50 border-green-400'
                     : 'bg-white border-gray-300'
                 }`}
               >
@@ -288,13 +288,13 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
                   }}>
                     <input
                       type="text"
-                      className="w-full px-4 py-2 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm font-bold text-center"
+                      className="w-full px-4 py-2 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-sm font-bold text-center"
                       placeholder="Name?"
                     />
                   </form>
                 ) : (
                   <div className="text-center">
-                    <div className="text-lg font-black text-green-700 mb-2">
+                    <div className="text-lg font-bold text-green-700 mb-2">
                       {userAnswers[person.id]}
                     </div>
                     <div className="text-3xl">✅</div>
@@ -327,8 +327,8 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
         <div className="text-7xl mb-6 animate-float">
           {isGreat ? '🎉' : isGood ? '👏' : '💪'}
         </div>
-        <h2 className="text-5xl font-black text-gray-900 mb-2">
-          <span className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
+        <h2 className="text-5xl font-bold text-gray-900 mb-2">
+          <span className="text-slate-900">
             {isGreat ? 'Superb!' : isGood ? 'Well Done!' : 'Keep Practicing!'}
           </span>
         </h2>
@@ -337,29 +337,29 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
         </p>
 
         <div className="grid grid-cols-2 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-8 shadow-xl border-3 border-purple-300 transform hover:scale-105 transition-transform">
-            <div className="text-6xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">{score}</div>
+          <div className="bg-blue-50 rounded-3xl p-8 shadow-sm border-2 border-blue-300 transition-transform">
+            <div className="text-6xl font-bold text-blue-600 mb-3">{score}</div>
             <div className="text-gray-800 font-bold text-lg">🎯 Score</div>
           </div>
-          <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl p-8 shadow-xl border-3 border-green-300 transform hover:scale-105 transition-transform">
-            <div className="text-6xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">{accuracy}%</div>
+          <div className="bg-emerald-50 rounded-3xl p-8 shadow-sm border-2 border-green-300 transition-transform">
+            <div className="text-6xl font-bold text-emerald-600 mb-3">{accuracy}%</div>
             <div className="text-gray-800 font-bold text-lg">✓ Accuracy</div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-white to-blue-50 rounded-3xl p-8 shadow-xl border-2 border-blue-200 mb-8 text-left">
+        <div className="bg-white rounded-3xl p-8 shadow-sm border-2 border-blue-200 mb-8 text-left">
           <div className="flex items-center gap-3 mb-6 justify-center">
             <span className="text-3xl">📊</span>
-            <h3 className="font-black text-gray-900 text-2xl">The People You Met</h3>
+            <h3 className="font-bold text-gray-900 text-2xl">The People You Met</h3>
           </div>
           <div className="space-y-3">
             {results.map((result, index) => (
               <div
                 key={index}
-                className={`flex items-center gap-4 p-5 rounded-2xl shadow-md border-2 transform hover:scale-105 transition-transform ${
+                className={`flex items-center gap-4 p-5 rounded-2xl shadow-md border-2 transition-transform ${
                   result.correct
-                    ? 'bg-gradient-to-r from-green-100 to-emerald-100 border-green-300'
-                    : 'bg-gradient-to-r from-red-100 to-pink-100 border-red-300'
+                    ? 'bg-emerald-50 border-green-300'
+                    : 'bg-red-50 border-red-300'
                 }`}
               >
                 <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-white flex-shrink-0">
@@ -374,7 +374,7 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
                 </div>
                 <div className="flex-1">
                   <div className="text-sm font-bold text-gray-600">{result.person.feature}</div>
-                  <div className="text-gray-900 font-black text-lg">{result.person.name}</div>
+                  <div className="text-gray-900 font-bold text-lg">{result.person.name}</div>
                   {!result.correct && (
                     <div className="text-sm text-red-700 font-semibold mt-1">
                       You wrote: {result.userAnswer || '(nothing)'}
@@ -394,7 +394,7 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
         <div className="flex gap-4 justify-center">
           <button
             onClick={resetGame}
-            className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+            className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
           >
             🔄 Meet More People!
           </button>

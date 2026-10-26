@@ -13,12 +13,12 @@ interface PAOSystemGameProps {
 const PAO_SYSTEM = [
   { number: '00', person: 'Superhero', action: 'Flying', object: 'Cape', emoji: '🦸', color: 'from-red-400 to-red-600' },
   { number: '11', person: 'Chef', action: 'Cooking', object: 'Pan', emoji: '👨‍🍳', color: 'from-orange-400 to-orange-600' },
-  { number: '22', person: 'Dancer', action: 'Dancing', object: 'Shoes', emoji: '💃', color: 'from-pink-400 to-pink-600' },
-  { number: '33', person: 'Musician', action: 'Playing', object: 'Guitar', emoji: '🎸', color: 'from-purple-400 to-purple-600' },
+  { number: '22', person: 'Dancer', action: 'Dancing', object: 'Shoes', emoji: '💃', color: 'from-rose-400 to-rose-600' },
+  { number: '33', person: 'Musician', action: 'Playing', object: 'Guitar', emoji: '🎸', color: 'from-lime-400 to-lime-600' },
   { number: '44', person: 'Athlete', action: 'Running', object: 'Medal', emoji: '🏃', color: 'from-blue-400 to-blue-600' },
   { number: '55', person: 'Artist', action: 'Painting', object: 'Brush', emoji: '🎨', color: 'from-green-400 to-green-600' },
   { number: '66', person: 'Scientist', action: 'Mixing', object: 'Flask', emoji: '🧪', color: 'from-cyan-400 to-cyan-600' },
-  { number: '77', person: 'Magician', action: 'Waving', object: 'Wand', emoji: '🪄', color: 'from-indigo-400 to-indigo-600' },
+  { number: '77', person: 'Magician', action: 'Waving', object: 'Wand', emoji: '🪄', color: 'from-sky-400 to-sky-600' },
   { number: '88', person: 'Pirate', action: 'Sailing', object: 'Ship', emoji: '🏴‍☠️', color: 'from-yellow-400 to-yellow-600' },
   { number: '99', person: 'Robot', action: 'Beeping', object: 'Antenna', emoji: '🤖', color: 'from-gray-400 to-gray-600' },
 ];
@@ -173,32 +173,32 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
     return (
       <div className="text-center relative z-10">
         <div className="text-6xl mb-6 animate-float">👤</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-4">
-          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <span className="text-blue-600">
             PAO System
           </span>
         </h2>
         <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto font-medium">
           Person-Action-Object! Create clear mental scenes from numbers! 🎬
         </p>
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto border-2 border-blue-200 shadow-lg">
-          <div className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-black mb-4">
+        <div className="bg-slate-50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto border-2 border-blue-200 shadow-lg">
+          <div className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-bold mb-4">
             {difficulty} Mode - Simplified
           </div>
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-white/60 backdrop-blur rounded-xl p-4">
-              <div className="text-3xl font-black text-purple-600 mb-1">{rounds}</div>
+              <div className="text-3xl font-bold text-blue-600 mb-1">{rounds}</div>
               <div className="text-gray-700 font-semibold text-sm">Rounds</div>
             </div>
             <div className="bg-white/60 backdrop-blur rounded-xl p-4">
-              <div className="text-3xl font-black text-blue-600 mb-1">{sequenceLength}</div>
+              <div className="text-3xl font-bold text-blue-600 mb-1">{sequenceLength}</div>
               <div className="text-gray-700 font-semibold text-sm">Digits</div>
             </div>
           </div>
         </div>
         <button
           onClick={startGame}
-          className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+          className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
         >
           🎓 Learn PAO!
         </button>
@@ -210,8 +210,8 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
     return (
       <div className="text-center relative z-10">
         <div className="text-6xl mb-6 animate-float">🎭</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-4">
-          <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <span className="text-emerald-600">
             Your PAO Characters
           </span>
         </h2>
@@ -223,10 +223,10 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
           {PAO_SYSTEM.map((item) => (
             <div
               key={item.number}
-              className={`bg-gradient-to-br ${item.color} rounded-2xl p-6 shadow-xl border-2 border-white transform hover:scale-105 transition-transform`}
+              className={`bg-gradient-to-br ${item.color} rounded-2xl p-6 shadow-sm border-2 border-white transition-transform`}
             >
               <div className="text-5xl mb-3">{item.emoji}</div>
-              <div className="text-2xl font-black text-white mb-1">{item.number}</div>
+              <div className="text-2xl font-bold text-white mb-1">{item.number}</div>
               <div className="text-sm font-bold text-white">{item.person}</div>
               <div className="text-xs text-white/80 mt-1">{item.action}</div>
               <div className="text-xs text-white/80">{item.object}</div>
@@ -246,7 +246,7 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
 
         <button
           onClick={startRound}
-          className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+          className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
         >
           ✓ Ready! Start Round {roundsCompleted + 1}
         </button>
@@ -263,11 +263,11 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-12 shadow-2xl border-4 border-purple-300 mb-8">
+        <div className="bg-blue-50 rounded-3xl p-12 shadow-sm border-2 border-blue-300 mb-8">
           <div className="text-sm font-bold text-gray-700 mb-4">Remember this scene:</div>
 
           <div className="bg-white/90 backdrop-blur rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 mb-6">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-4 md:mb-6 break-words px-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-blue-600 mb-4 md:mb-6 break-words px-2">
               {paoComponents.person} {paoComponents.action} {paoComponents.object}!
             </div>
             <div className="text-gray-600 text-sm sm:text-base md:text-lg">
@@ -277,13 +277,13 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
 
           <div className="bg-blue-100 rounded-2xl p-4 sm:p-6 mb-6">
             <div className="text-xs sm:text-sm font-bold text-gray-700 mb-2">This represents:</div>
-            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-blue-600 tracking-widest break-all">
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-600 tracking-widest break-all">
               {targetSequence}
             </div>
           </div>
 
-          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-8 py-4">
-            <div className="text-4xl font-black animate-pulse">
+          <div className="inline-block bg-slate-900 text-white rounded-full px-8 py-4">
+            <div className="text-4xl font-bold">
               {timeLeft}s
             </div>
           </div>
@@ -296,23 +296,23 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
     return (
       <div className="max-w-2xl mx-auto relative z-10">
         <div className="text-6xl mb-6 text-center animate-float">🤔</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-6 text-center">
-          <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">
+          <span className="text-emerald-600">
             What Was The Number?
           </span>
         </h2>
 
         {paoComponents && (
-          <div className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-3xl p-8 shadow-xl border-2 border-yellow-300 mb-6">
+          <div className="bg-amber-50 rounded-3xl p-8 shadow-sm border-2 border-amber-200 mb-6">
             <div className="text-sm font-bold text-gray-700 mb-2">The scene was:</div>
-            <div className="text-3xl font-black text-gray-900 mb-4">
+            <div className="text-3xl font-bold text-gray-900 mb-4">
               {paoComponents.person} {paoComponents.action} {paoComponents.object}
             </div>
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
-          <div className="bg-white rounded-3xl p-8 shadow-xl border-2 border-purple-200 mb-6">
+          <div className="bg-white rounded-3xl p-8 shadow-sm border-2 border-slate-200 mb-6">
             <label className="block text-gray-700 font-bold mb-4 text-lg">
               Type the {sequenceLength}-digit number:
             </label>
@@ -320,7 +320,7 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
               type="text"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
-              className="w-full px-6 py-4 rounded-full border-3 border-purple-300 focus:border-purple-500 focus:outline-none text-3xl font-black text-center tracking-widest"
+              className="w-full px-6 py-4 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-3xl font-bold text-center tracking-widest"
               placeholder="______"
               maxLength={sequenceLength}
               autoFocus
@@ -329,7 +329,7 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-orange-600 to-pink-600 text-white px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 md:py-4 rounded-full font-black text-base sm:text-lg md:text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl"
+            className="w-full bg-blue-600 text-white px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 md:py-4 rounded-full font-bold text-base sm:text-lg md:text-xl hover:bg-blue-700 transition-all shadow-sm"
           >
             ✓ Submit Answer
           </button>
@@ -347,8 +347,8 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
         <div className="text-5xl sm:text-6xl md:text-7xl mb-6 animate-float">
           {isGreat ? '🎉' : isGood ? '👏' : '💪'}
         </div>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-2 px-4">
-          <span className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent break-words">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 px-4">
+          <span className="text-slate-900 break-words">
             {isGreat ? 'Amazing!' : isGood ? 'Great Work!' : 'Keep Going!'}
           </span>
         </h2>
@@ -357,12 +357,12 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
         </p>
 
         <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-8">
-          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl border-3 border-purple-300 transform hover:scale-105 transition-transform">
-            <div className="text-4xl sm:text-5xl md:text-6xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">{score}</div>
+          <div className="bg-blue-50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm border-2 border-blue-300 transition-transform">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-blue-600 mb-3">{score}</div>
             <div className="text-gray-800 font-bold text-sm sm:text-base md:text-lg">🎯 Score</div>
           </div>
-          <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl border-3 border-green-300 transform hover:scale-105 transition-transform">
-            <div className="text-4xl sm:text-5xl md:text-6xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">{accuracy}%</div>
+          <div className="bg-emerald-50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm border-2 border-green-300 transition-transform">
+            <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-emerald-600 mb-3">{accuracy}%</div>
             <div className="text-gray-800 font-bold text-sm sm:text-base md:text-lg">✓ Accuracy</div>
           </div>
         </div>
@@ -376,7 +376,7 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
         <div className="flex gap-4 justify-center">
           <button
             onClick={resetGame}
-            className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+            className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
           >
             🔄 Practice More!
           </button>

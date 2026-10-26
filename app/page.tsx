@@ -1,98 +1,100 @@
-import TacticCard from '@/components/TacticCard';
-import { tactics } from '@/lib/tactics';
+import Link from 'next/link';
+import LearningPath from '@/components/LearningPath';
+import ProgressSummary from '@/components/ProgressSummary';
+import PostCard from '@/components/PostCard';
+import { FIRST_TACTIC_ID } from '@/lib/tactics';
+import { getAllPosts } from '@/lib/blog';
+
+const steps = [
+  {
+    icon: '📚',
+    title: 'Learn a technique',
+    text: 'Each one takes a minute to read, with examples and tips from memory athletes.',
+  },
+  {
+    icon: '🎮',
+    title: 'Practice with a game',
+    text: 'Short timed rounds put the technique to work. Start easy, then turn up the difficulty.',
+  },
+  {
+    icon: '📈',
+    title: 'Beat your best',
+    text: 'Your scores are saved on this device. Come back daily to build a streak.',
+  },
+];
 
 export default function Home() {
+  const latestPosts = getAllPosts().slice(0, 3);
+
   return (
-    <div className="min-h-screen">
-      <main className="container mx-auto px-4 py-12 max-w-7xl">
-        {/* Floating decorative elements */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-10">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-yellow-400 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute top-40 right-20 w-40 h-40 bg-orange-400 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-20 left-1/4 w-36 h-36 bg-pink-400 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
+    <div className="mx-auto max-w-6xl px-4">
+      {/* Hero */}
+      <section className="py-14 sm:py-20 text-center">
+        <p className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-700 ring-1 ring-inset ring-blue-200 mb-6">
+          8 techniques used by memory champions
+        </p>
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 mb-5">
+          Train your memory
+          <span className="block text-blue-600">like a champion</span>
+        </h1>
+        <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-9">
+          Learn the techniques professional memory athletes use, then practice them
+          with quick games that track your progress.
+        </p>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
+          <Link
+            href={`/tactics/${FIRST_TACTIC_ID}`}
+            className="inline-flex items-center justify-center min-h-[52px] px-7 rounded-xl bg-blue-600 text-white font-semibold text-lg shadow-sm hover:bg-blue-700 transition-colors"
+          >
+            New here? Start with the Linking Method
+          </Link>
+          <Link
+            href="/daily"
+            className="inline-flex items-center justify-center gap-2 min-h-[52px] px-7 rounded-xl bg-white text-slate-900 font-semibold text-lg border border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition-colors"
+          >
+            <span aria-hidden="true">📅</span>
+            Today&apos;s challenge
+          </Link>
         </div>
+      </section>
 
-        {/* Header */}
-        <div className="text-center mb-16 relative">
-          <div className="inline-block mb-6">
-            <span className="px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white font-medium text-sm border border-white/30">
-              ✨ Train Your Superhuman Memory
-            </span>
-          </div>
-          <h1 className="text-6xl md:text-7xl font-black text-white mb-6 drop-shadow-lg">
-            Memory
-            <span className="block bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent">
-              Champions
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-medium drop-shadow">
-            Master the secret techniques used by professional memory athletes.
-            <br />
-            <span className="text-yellow-200">Level up your brain! 🧠⚡</span>
-          </p>
-        </div>
+      <ProgressSummary />
 
-        {/* Tactics Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
-          {tactics.map((tactic) => (
-            <TacticCard key={tactic.id} tactic={tactic} />
+      <LearningPath />
+
+      {/* How it works */}
+      <section aria-labelledby="how-it-works" className="mt-20">
+        <h2 id="how-it-works" className="text-2xl font-bold text-slate-900 text-center mb-8">
+          How it works
+        </h2>
+        <div className="grid gap-5 md:grid-cols-3">
+          {steps.map((step) => (
+            <div key={step.title} className="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-2xl mb-4" aria-hidden="true">
+                {step.icon}
+              </div>
+              <h3 className="font-bold text-slate-900 mb-1.5">{step.title}</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">{step.text}</p>
+            </div>
           ))}
         </div>
+      </section>
 
-        {/* Info Section */}
-        <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 shadow-2xl">
-          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-            <div className="bg-gradient-to-r from-yellow-400 to-pink-500 px-8 py-3 rounded-full shadow-lg">
-              <span className="text-white font-bold text-lg">⚡ How It Works</span>
-            </div>
+      {latestPosts.length > 0 && (
+        <section aria-labelledby="from-the-blog" className="mt-20">
+          <div className="flex items-baseline justify-between mb-6">
+            <h2 id="from-the-blog" className="text-2xl font-bold text-slate-900">From the blog</h2>
+            <Link href="/blog" className="text-sm font-semibold text-blue-600 hover:text-blue-700">
+              All articles →
+            </Link>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mt-6">
-            <div className="text-center group">
-              <div className="inline-block p-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-3xl mb-4 transform group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                <span className="text-5xl">📚</span>
-              </div>
-              <h3 className="font-bold text-white text-xl mb-3">Learn the Tricks</h3>
-              <p className="text-white/80 text-sm leading-relaxed">
-                Discover mind-blowing memory techniques that champions actually use in competitions!
-              </p>
-            </div>
-            <div className="text-center group">
-              <div className="inline-block p-6 bg-gradient-to-br from-pink-400 to-purple-600 rounded-3xl mb-4 transform group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                <span className="text-5xl">🎮</span>
-              </div>
-              <h3 className="font-bold text-white text-xl mb-3">Play & Practice</h3>
-              <p className="text-white/80 text-sm leading-relaxed">
-                Turn learning into an addictive game with challenges that level up your brain power!
-              </p>
-            </div>
-            <div className="text-center group">
-              <div className="inline-block p-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-3xl mb-4 transform group-hover:scale-110 transition-transform duration-300 shadow-xl">
-                <span className="text-5xl">🏆</span>
-              </div>
-              <h3 className="font-bold text-white text-xl mb-3">Become a Legend</h3>
-              <p className="text-white/80 text-sm leading-relaxed">
-                Watch your scores soar as you unlock your brain's hidden superpowers!
-              </p>
-            </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {latestPosts.map((post) => (
+              <PostCard key={post.slug} post={post} />
+            ))}
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-16 text-center">
-          <p className="text-white/60 text-sm">
-            Created by{' '}
-            <a
-              href="https://www.codebyhicham.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/90 hover:text-white font-semibold underline decoration-white/40 hover:decoration-white transition-colors"
-            >
-              codebyhicham
-            </a>
-          </p>
-        </div>
-      </main>
+        </section>
+      )}
     </div>
   );
 }

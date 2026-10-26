@@ -17,9 +17,10 @@ export const tactics: Tactic[] = [
       'Review the story from start to finish'
     ],
     examples: [
-      'Apple, Car, Cloud: "A giant apple drives a car into a fluffy cloud"',
-      'Book, Coffee, Phone: "A book spills coffee all over a ringing phone"',
-      'Tree, Piano, Ocean: "A tree grows out of a piano floating in the ocean"'
+      'Apple → Car: a giant apple is squeezed behind the wheel, driving a tiny car',
+      'Car → Cloud: the car launches off a ramp and crashes into a fluffy cloud',
+      'Cloud → Umbrella: the cloud bursts and a huge umbrella pops open to catch the rain',
+      'Recall the chain: apple, car, cloud, umbrella. Each picture leads to the next'
     ],
     tips: [
       'Make your images exaggerated and unusual',
@@ -88,7 +89,7 @@ export const tactics: Tactic[] = [
     id: 'chunking',
     name: 'Chunking',
     shortDescription: 'Group information into larger meaningful units',
-    fullDescription: 'Chunking involves breaking down large amounts of information into smaller, manageable groups or "chunks" that are easier to remember. Our brains can typically hold 7±2 chunks of information in working memory.',
+    fullDescription: 'Chunking involves breaking down large amounts of information into smaller, manageable groups or "chunks" that are easier to remember. Working memory can only hold around four chunks at once, so turning many small pieces into a few meaningful ones lets you hold far more.',
     difficulty: 'Beginner',
     bestFor: 'Phone numbers, long sequences, text, numbers',
     steps: [
@@ -126,10 +127,11 @@ export const tactics: Tactic[] = [
       'To recall, visualize the image and decode back to numbers'
     ],
     examples: [
-      '32 = MN → "moon", "man", "mine"',
-      '45 = RL → "roll", "rail", "royal"',
-      '321 = MNT → "mint", "mount"',
-      'Date 1776 = TKKS → "tactics"'
+      '32 = M, N → "moon", "man", "mine"',
+      '45 = R, L → "roll", "rail", "royal"',
+      '321 = M, N, T → "mint", "mount"',
+      'Moon landing 1969 = T, P, SH, P → "top ship": picture the rocket as the top ship',
+      'Sounds, not spelling: "knee" has a silent K, so it is just N = 2'
     ],
     tips: [
       'Practice the number-to-sound conversions until automatic',
@@ -154,11 +156,11 @@ export const tactics: Tactic[] = [
       'Visualize the complete scene clearly'
     ],
     examples: [
-      '12 = Albert Einstein (person)',
-      '34 = Juggling (action)',
-      '56 = Bananas (object)',
-      '123456 = "Einstein juggling bananas"',
-      '00 = Your hero, 01 = A celebrity, 02 = A friend, etc.'
+      '12 = Albert Einstein · writing equations · a piece of chalk',
+      '34 = A clown · juggling · juggling pins',
+      '56 = A monkey · peeling · a banana',
+      '123456 = Einstein (person of 12) juggling (action of 34) a banana (object of 56)',
+      'Every number from 00 to 99 has all three: a person, their action and their object'
     ],
     tips: [
       'Choose people you know well or famous figures',
@@ -184,10 +186,10 @@ export const tactics: Tactic[] = [
       'Practice recalling the name when you see them again'
     ],
     examples: [
-      'Rose with rosy cheeks: Imagine roses growing from her cheeks',
-      'Bill with a prominent forehead: Visualize a dollar bill on his forehead',
-      'Mike with a strong voice: Picture him holding a microphone to his mouth',
-      'Lily with delicate features: See lily flowers around her face'
+      'Rose with rosy cheeks: imagine roses blooming out of her cheeks',
+      'Mike with a booming voice: picture him speaking into a giant microphone',
+      'Names that aren\'t pictures: swap in a similar-sounding word. Sophia → "sofa": see her balancing a sofa on her head',
+      'Greg → "keg": picture a beer keg perched on his broad shoulders'
     ],
     tips: [
       'Really focus when being introduced',
@@ -207,16 +209,16 @@ export const tactics: Tactic[] = [
     steps: [
       'Learn the number-to-letter conversion: 0=O, 1=A, 2=B, 3=C, 4=D, 5=E, 6=S, 7=G, 8=H, 9=N',
       'For each two-digit number, convert to two letters (initials)',
-      'Assign a person with those initials (52=EB=Emmanuel Bannon, or Elvis Presley)',
+      'Assign a person with those initials (15 = AE = Albert Einstein)',
       'Give each person a characteristic action',
       'For four digits, first person does second person\'s action',
       'Create a clear scene of the interaction'
     ],
     examples: [
-      '52 = EB = Elvis Presley (pelvis thrusting)',
-      '19 = AN = Albert Newton (writing equations)',
-      '5219 = Elvis Presley writing equations',
-      '00 = OO = Barack Obama, 11 = AA = Audrey Hepburn, etc.'
+      '15 = AE = Albert Einstein (writing on a chalkboard)',
+      '23 = BC = Bill Clinton (playing the saxophone)',
+      '1523 = Einstein playing the saxophone: the first person does the second person\'s action',
+      '00 = OO = Ozzy Osbourne, 88 = HH = Hulk Hogan'
     ],
     tips: [
       'Use well-known people for easier recall',
@@ -227,6 +229,36 @@ export const tactics: Tactic[] = [
     icon: '🎭'
   }
 ];
+
+// Recommended order for new players: easiest techniques first
+export const LEARNING_PATH: { level: Tactic['difficulty']; title: string; subtitle: string; ids: string[] }[] = [
+  {
+    level: 'Beginner',
+    title: 'Start here',
+    subtitle: 'Simple techniques you can use in minutes',
+    ids: ['linking-method', 'peg-system', 'chunking'],
+  },
+  {
+    level: 'Intermediate',
+    title: 'Level up',
+    subtitle: 'Build mental places and remember people',
+    ids: ['memory-palace', 'face-name'],
+  },
+  {
+    level: 'Advanced',
+    title: 'Master the numbers',
+    subtitle: 'The systems competitors use for digits and cards',
+    ids: ['major-system', 'pao-system', 'dominic-system'],
+  },
+];
+
+export const FIRST_TACTIC_ID = LEARNING_PATH[0].ids[0];
+
+export function getNextTactic(id: string): Tactic | undefined {
+  const order = LEARNING_PATH.flatMap((step) => step.ids);
+  const index = order.indexOf(id);
+  return index >= 0 && index < order.length - 1 ? getTacticById(order[index + 1]) : undefined;
+}
 
 export function getTacticById(id: string): Tactic | undefined {
   return tactics.find(t => t.id === id);

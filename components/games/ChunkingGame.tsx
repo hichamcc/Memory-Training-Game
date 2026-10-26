@@ -132,36 +132,36 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
     return (
       <div className="text-center relative z-10">
         <div className="text-6xl mb-6 animate-float">🧩</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-4">
-          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <span className="text-blue-600">
             Chunking Challenge
           </span>
         </h2>
         <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto font-medium">
           Break long numbers into smaller chunks to remember them easily! Like phone numbers! 📱
         </p>
-        <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto border-2 border-blue-200 shadow-lg">
-          <div className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-black mb-4">
+        <div className="bg-slate-50 rounded-2xl p-8 mb-8 max-w-2xl mx-auto border-2 border-blue-200 shadow-lg">
+          <div className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-bold mb-4">
             {difficulty} Mode
           </div>
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-white/60 backdrop-blur rounded-xl p-4">
-              <div className="text-3xl font-black text-purple-600 mb-1">{sequenceLength}</div>
+              <div className="text-3xl font-bold text-blue-600 mb-1">{sequenceLength}</div>
               <div className="text-gray-700 font-semibold text-sm">Digits to Remember</div>
             </div>
             <div className="bg-white/60 backdrop-blur rounded-xl p-4">
-              <div className="text-3xl font-black text-blue-600 mb-1">{memorizeTime}s</div>
+              <div className="text-3xl font-bold text-blue-600 mb-1">{memorizeTime}s</div>
               <div className="text-gray-700 font-semibold text-sm">Time to Memorize</div>
             </div>
           </div>
           <div className="mt-4 bg-white/60 backdrop-blur rounded-xl p-4">
-            <div className="text-2xl font-black text-green-600 mb-1">{chunks.length || Math.ceil(sequenceLength / chunkSize)} Chunks</div>
+            <div className="text-2xl font-bold text-green-600 mb-1">{chunks.length || Math.ceil(sequenceLength / chunkSize)} Chunks</div>
             <div className="text-gray-700 font-semibold text-sm">{chunkSize} digits per chunk</div>
           </div>
         </div>
         <button
           onClick={startGame}
-          className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+          className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
         >
           🚀 Start Chunking!
         </button>
@@ -178,15 +178,15 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border-4 border-yellow-300 mb-8">
+        <div className="bg-amber-50 rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 shadow-sm border-2 border-amber-200 mb-8">
           <div className="mb-8">
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
               {chunks.map((chunk, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl sm:rounded-2xl px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 shadow-xl transform hover:scale-110 transition-transform"
+                  className="bg-blue-600 text-white rounded-xl sm:rounded-2xl px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 shadow-sm transition-transform"
                 >
-                  <div className="text-3xl sm:text-4xl md:text-5xl font-black tracking-wider">
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wider">
                     {chunk}
                   </div>
                 </div>
@@ -194,14 +194,14 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
             </div>
           </div>
 
-          <div className="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-full px-6 sm:px-8 py-3 sm:py-4">
-            <div className="text-4xl sm:text-5xl font-black animate-pulse">
+          <div className="inline-block bg-slate-900 text-white rounded-full px-6 sm:px-8 py-3 sm:py-4">
+            <div className="text-4xl sm:text-5xl font-bold">
               {timeLeft}
             </div>
           </div>
         </div>
 
-        <div className="bg-white/60 backdrop-blur rounded-2xl p-6 max-w-2xl mx-auto border-2 border-purple-200">
+        <div className="bg-white/60 backdrop-blur rounded-2xl p-6 max-w-2xl mx-auto border-2 border-slate-200">
           <p className="text-gray-800 font-bold text-lg mb-2">
             ✨ Group them in your mind! ✨
           </p>
@@ -210,7 +210,7 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
           </p>
         </div>
 
-        <div className="mt-6 bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl p-6 max-w-2xl mx-auto border-2 border-green-300">
+        <div className="mt-6 bg-emerald-50 rounded-2xl p-6 max-w-2xl mx-auto border-2 border-green-300">
           <p className="text-gray-800 font-bold text-sm mb-2">💡 Example Strategy:</p>
           <p className="text-gray-700 text-sm">
             For "149217761945" → Think: <strong>1492</strong> (Columbus), <strong>1776</strong> (Independence), <strong>1945</strong> (WWII)
@@ -224,8 +224,8 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
     return (
       <div className="max-w-2xl mx-auto relative z-10">
         <div className="text-6xl mb-6 text-center animate-float">🤔</div>
-        <h2 className="text-4xl font-black text-gray-900 mb-6 text-center">
-          <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+        <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">
+          <span className="text-emerald-600">
             Time to Recall!
           </span>
         </h2>
@@ -234,7 +234,7 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
         </p>
 
         <form onSubmit={handleSubmitAnswer} className="mb-6">
-          <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-xl border-2 border-blue-200 mb-6">
+          <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-sm border-2 border-blue-200 mb-6">
             <label className="block text-gray-700 font-bold mb-4 text-base md:text-lg">
               Enter the {sequenceLength}-digit sequence:
             </label>
@@ -242,7 +242,7 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
               type="text"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
-              className="w-full px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-full border-3 border-purple-300 focus:border-purple-500 focus:outline-none text-lg sm:text-xl md:text-2xl font-black text-center shadow-lg bg-white tracking-widest"
+              className="w-full px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-lg sm:text-xl md:text-2xl font-bold text-center shadow-lg bg-white tracking-widest"
               placeholder="123 456 789"
               autoFocus
             />
@@ -253,7 +253,7 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-orange-600 to-pink-600 text-white px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 md:py-5 rounded-full font-black text-base sm:text-lg md:text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl"
+            className="w-full bg-blue-600 text-white px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 md:py-5 rounded-full font-bold text-base sm:text-lg md:text-xl hover:bg-blue-700 transition-all shadow-sm"
           >
             ✓ Submit Answer
           </button>
@@ -285,8 +285,8 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
         <div className="text-7xl mb-6 animate-float">
           {isGreat ? '🎉' : isGood ? '👏' : '💪'}
         </div>
-        <h2 className="text-5xl font-black text-gray-900 mb-2">
-          <span className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 bg-clip-text text-transparent">
+        <h2 className="text-5xl font-bold text-gray-900 mb-2">
+          <span className="text-slate-900">
             {isGreat ? 'Incredible!' : isGood ? 'Good Work!' : 'Nice Try!'}
           </span>
         </h2>
@@ -295,28 +295,28 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
         </p>
 
         <div className="grid grid-cols-2 gap-6 mb-8">
-          <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-8 shadow-xl border-3 border-purple-300 transform hover:scale-105 transition-transform">
-            <div className="text-6xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">{score}</div>
+          <div className="bg-blue-50 rounded-3xl p-8 shadow-sm border-2 border-blue-300 transition-transform">
+            <div className="text-6xl font-bold text-blue-600 mb-3">{score}</div>
             <div className="text-gray-800 font-bold text-lg">🎯 Score</div>
           </div>
-          <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl p-8 shadow-xl border-3 border-green-300 transform hover:scale-105 transition-transform">
-            <div className="text-6xl font-black bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-3">{accuracy}%</div>
+          <div className="bg-emerald-50 rounded-3xl p-8 shadow-sm border-2 border-green-300 transition-transform">
+            <div className="text-6xl font-bold text-emerald-600 mb-3">{accuracy}%</div>
             <div className="text-gray-800 font-bold text-lg">✓ Accuracy</div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-white to-blue-50 rounded-3xl p-8 shadow-xl border-2 border-blue-200 mb-8">
+        <div className="bg-white rounded-3xl p-8 shadow-sm border-2 border-blue-200 mb-8">
           <div className="flex items-center gap-3 mb-6 justify-center">
             <span className="text-3xl">📊</span>
-            <h3 className="font-black text-gray-900 text-2xl">Digit by Digit</h3>
+            <h3 className="font-bold text-gray-900 text-2xl">Digit by Digit</h3>
           </div>
 
           <div className="mb-6">
             <div className="text-sm font-bold text-gray-600 mb-3">Correct Sequence (in chunks):</div>
             <div className="flex flex-wrap justify-center gap-3">
               {chunks.map((chunk, index) => (
-                <div key={index} className="bg-gradient-to-br from-green-400 to-emerald-500 text-white rounded-xl px-6 py-3 shadow-lg">
-                  <div className="text-3xl font-black tracking-wider">{chunk}</div>
+                <div key={index} className="bg-emerald-500 text-white rounded-xl px-6 py-3 shadow-lg">
+                  <div className="text-3xl font-bold tracking-wider">{chunk}</div>
                 </div>
               ))}
             </div>
@@ -325,7 +325,7 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
           <div className="mb-6">
             <div className="text-sm font-bold text-gray-600 mb-3">Your Answer:</div>
             <div className="bg-white rounded-2xl p-4 shadow-inner">
-              <div className="text-3xl font-black tracking-wider text-gray-900">
+              <div className="text-3xl font-bold tracking-wider text-gray-900">
                 {cleanedUserAnswer || '(nothing)'}
               </div>
             </div>
@@ -336,7 +336,7 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
             {comparison.map((item, index) => (
               <div
                 key={index}
-                className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl font-black shadow-md ${
+                className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold shadow-md ${
                   item.isCorrect
                     ? 'bg-green-500 text-white'
                     : 'bg-red-500 text-white'
@@ -351,7 +351,7 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
         <div className="flex gap-4 justify-center">
           <button
             onClick={resetGame}
-            className="bg-gradient-to-r from-orange-600 to-pink-600 text-white px-12 py-5 rounded-full font-black text-xl hover:from-orange-700 hover:to-pink-700 transition-all transform hover:scale-110 shadow-2xl"
+            className="bg-blue-600 text-white px-12 py-5 rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-sm"
           >
             🔄 Try Another!
           </button>

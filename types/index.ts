@@ -40,3 +40,24 @@ export interface HighScore {
 }
 
 export type GamePhase = 'intro' | 'memorize' | 'recall' | 'results';
+
+export interface DailyResult {
+  score: number;
+  accuracy: number;
+  // One entry per word, in order: was it recalled correctly
+  marks: boolean[];
+  timestamp: number;
+}
+
+export interface TacticProgress {
+  bestScore: number;
+  bestAccuracy: number;
+  attempts: number;
+}
+
+export interface Progress {
+  tactics: Record<string, TacticProgress>;
+  streak: number;
+  totalGames: number;
+  dailyToday: DailyResult | null;
+}
