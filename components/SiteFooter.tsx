@@ -8,12 +8,12 @@ export default function SiteFooter() {
           href="https://thinkspeak.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
-          className="md:hidden inline-flex items-center gap-1 min-h-[44px] mb-2 font-semibold text-slate-700 hover:text-slate-900"
+          className="lg:hidden inline-flex items-center gap-1 min-h-[44px] mb-2 font-semibold text-slate-700 hover:text-slate-900"
         >
           Learn languages <span aria-hidden="true" className="text-xs">↗</span>
           <span className="sr-only">(opens in a new tab)</span>
         </a>
-        <br className="md:hidden" />
+        <br className="lg:hidden" />
         Created by{' '}
         <a
           href="https://www.codebyhicham.com"

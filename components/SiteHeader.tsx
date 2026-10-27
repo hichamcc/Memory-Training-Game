@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HeaderFeedbackLink from './HeaderFeedbackLink';
 
 export default function SiteHeader() {
   return (
@@ -25,12 +26,13 @@ export default function SiteHeader() {
             href="https://thinkspeak.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-1 min-h-[44px] px-3 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+            className="hidden lg:inline-flex items-center gap-1 min-h-[44px] px-3 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
           >
             Learn languages
             <span aria-hidden="true" className="text-xs">↗</span>
             <span className="sr-only">(opens in a new tab)</span>
           </a>
+          <HeaderFeedbackLink />
           <Link
             href="/daily"
             className="inline-flex items-center gap-1.5 min-h-[44px] px-4 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"

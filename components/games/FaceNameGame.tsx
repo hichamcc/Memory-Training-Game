@@ -10,21 +10,29 @@ interface FaceNameGameProps {
   onComplete: (score: number, accuracy: number) => void;
 }
 
-// People with distinctive features (using real photos)
+// People with distinctive features (real photos). Each feature must be clearly
+// visible in its photo, since players are told to link the name to it.
+const photo = (id: string) => `https://images.unsplash.com/photo-${id}?w=400&h=400&fit=crop&crop=faces`;
+
 const PEOPLE_DATABASE = [
-  { id: 1, name: 'Alex', feature: 'Curly Hair', imageUrl: 'https://images.unsplash.com/photo-1574626828260-7f4c0e5a0b99?w=400&h=400&fit=crop&crop=faces', description: 'Has distinctive curly blonde hair', sport: '⚽' },
-  { id: 2, name: 'James', feature: 'Sharp Features', imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces', description: 'Has sharp, defined facial features', sport: '🎾' },
-  { id: 3, name: 'Carlos', feature: 'Bright Smile', imageUrl: 'https://images.unsplash.com/photo-1542838686-3e0e2f0e3c6e?w=400&h=400&fit=crop&crop=faces', description: 'Known for his wide, bright smile', sport: '⚽' },
-  { id: 4, name: 'Thomas', feature: 'Strong Jawline', imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces', description: 'Has a prominent, strong jawline', sport: '🎾' },
-  { id: 5, name: 'Marco', feature: 'Beard', imageUrl: 'https://images.unsplash.com/photo-1558222218-b7b54eede3f3?w=400&h=400&fit=crop&crop=faces', description: 'Has a distinctive well-groomed beard', sport: '⚽' },
-  { id: 6, name: 'Daniel', feature: 'Square Jaw', imageUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces', description: 'Has a strong, square jawline', sport: '🎾' },
-  { id: 7, name: 'Andre', feature: 'Shaved Head', imageUrl: 'https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=400&h=400&fit=crop&crop=faces', description: 'Known for his clean-shaven head', sport: '⚽' },
-  { id: 8, name: 'Viktor', feature: 'High Forehead', imageUrl: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&h=400&fit=crop&crop=faces', description: 'Has a distinctive high forehead', sport: '🎾' },
-  { id: 9, name: 'Kevin', feature: 'Wide Eyes', imageUrl: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=400&h=400&fit=crop&crop=faces', description: 'Has notably large, expressive eyes', sport: '⚽' },
-  { id: 10, name: 'Stefan', feature: 'Chiseled Face', imageUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=faces', description: 'Has chiseled, well-defined features', sport: '🎾' },
-  { id: 11, name: 'Lucas', feature: 'Thick Eyebrows', imageUrl: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop&crop=faces', description: 'Has prominent, dark eyebrows', sport: '⚽' },
-  { id: 12, name: 'Rafael', feature: 'Stubble Beard', imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces', description: 'Known for his signature stubble', sport: '🎾' },
+  { id: 1, name: 'Lucas', feature: 'Curly Hair', imageUrl: photo('1568602471122-7832951cc4c5'), description: 'Has a big mop of curly hair and a beard', sport: '⚽' },
+  { id: 2, name: 'James', feature: 'Bright Smile', imageUrl: photo('1507003211169-0a1dd7228f2d'), description: 'Flashes a wide, bright smile', sport: '🎾' },
+  { id: 3, name: 'Thomas', feature: 'Slicked-Back Hair', imageUrl: photo('1500648767791-00dcc994a43e'), description: 'Wears his dark hair slicked back', sport: '⚽' },
+  { id: 4, name: 'Daniel', feature: 'Messy Hair', imageUrl: photo('1506794778202-cad84cf45f1d'), description: 'Has tousled hair and light stubble', sport: '🎾' },
+  { id: 5, name: 'Andre', feature: 'Black Cap', imageUrl: photo('1564564321837-a57b7070ac4f'), description: 'Always wears a black cap', sport: '⚽' },
+  { id: 6, name: 'Marco', feature: 'Chunky Scarf', imageUrl: photo('1527980965255-d3b416303d12'), description: 'Wrapped up in a thick grey scarf', sport: '🎾' },
+  { id: 7, name: 'Viktor', feature: 'Tall Quiff', imageUrl: photo('1535713875002-d1d0cf377fde'), description: 'Has his hair styled up in a tall quiff', sport: '⚽' },
+  { id: 8, name: 'Kevin', feature: 'Black Hat', imageUrl: photo('1539571696357-5a69c17a67c6'), description: 'Wears a wide black hat over his curls', sport: '🎾' },
+  { id: 9, name: 'Stefan', feature: 'Goatee', imageUrl: photo('1547425260-76bcadfb4f2c'), description: 'Has a dark goatee and glasses', sport: '⚽' },
+  { id: 10, name: 'Rafael', feature: 'Light Hair', imageUrl: photo('1570295999919-56ceb5ecca61'), description: 'Has short, light brown hair swept up', sport: '🎾' },
+  { id: 11, name: 'Erik', feature: 'Ginger Beard', imageUrl: photo('1599566150163-29194dcaad36'), description: 'Has a full ginger beard and glasses', sport: '⚽' },
+  { id: 12, name: 'Noah', feature: 'Round Glasses', imageUrl: photo('1633332755192-727a05c4013d'), description: 'Wears round wire glasses', sport: '🎾' },
+  { id: 13, name: 'Sofia', feature: 'Long Wavy Hair', imageUrl: photo('1544005313-94ddf0286df2'), description: 'Has long, wavy brown hair', sport: '⚽' },
 ];
+
+function isCorrectName(answer: string | undefined, name: string) {
+  return (answer ?? '').toLowerCase().trim() === name.toLowerCase().trim();
+}
 
 export default function FaceNameGame({ difficulty, onComplete }: FaceNameGameProps) {
   const [phase, setPhase] = useState<GamePhase>('intro');
@@ -72,14 +80,16 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
     setUserAnswers({});
   };
 
-  const handleSubmitAnswer = (personId: number, name: string) => {
-    if (!name.trim()) return;
+  // An empty name means the player skipped this face
+  const handleSubmitAnswer = (personId: number, name: string, skipped = false) => {
+    if (!skipped && !name.trim()) return;
 
-    const newAnswers = { ...userAnswers, [personId]: name.trim() };
+    const newAnswers = { ...userAnswers, [personId]: skipped ? '' : name.trim() };
     setUserAnswers(newAnswers);
 
     if (Object.keys(newAnswers).length === people.length) {
-      finishGame(newAnswers);
+      // Short pause so the feedback on the last card is visible
+      setTimeout(() => finishGame(newAnswers), 1200);
     }
   };
 
@@ -87,14 +97,7 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
     const endTime = Date.now();
     const timeElapsed = Math.floor((endTime - startTime) / 1000);
 
-    let correctCount = 0;
-    for (const person of people) {
-      const userAnswer = (answers[person.id] || '').toLowerCase().trim();
-      const correctAnswer = person.name.toLowerCase().trim();
-      if (userAnswer === correctAnswer) {
-        correctCount++;
-      }
-    }
+    const correctCount = people.filter((person) => isCorrectName(answers[person.id], person.name)).length;
 
     const result = calculateScore(correctCount, people.length, timeElapsed, difficulty);
     setScore(result.score);
@@ -237,6 +240,9 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
   }
 
   if (phase === 'recall') {
+    const answeredCount = Object.keys(userAnswers).length;
+    const correctSoFar = people.filter((p) => userAnswers[p.id] !== undefined && isCorrectName(userAnswers[p.id], p.name)).length;
+
     return (
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-6xl mb-6 text-center animate-float">🎭</div>
@@ -245,23 +251,32 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
             Who's Who?
           </span>
         </h2>
-        <div className="bg-emerald-50 rounded-full px-6 py-3 mb-8 text-center border-2 border-green-300">
+        <p className="text-center text-gray-600 mb-2">
+          Type each person&apos;s name and press <strong>Check</strong>. You&apos;ll see right away if you got it.
+        </p>
+        <div aria-live="polite" className="bg-slate-50 rounded-full px-6 py-3 mb-8 text-center border-2 border-slate-200">
           <p className="text-gray-800 font-bold text-lg">
-            {Object.keys(userAnswers).length} / {people.length} names remembered! 🎯
+            {answeredCount} / {people.length} answered
+            <span className="mx-2 text-slate-300">·</span>
+            <span className="text-emerald-600">{correctSoFar} correct</span>
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
           {shuffledPeople.map((person) => {
             const hasAnswered = userAnswers[person.id] !== undefined;
+            const answer = userAnswers[person.id];
+            const correct = hasAnswered && isCorrectName(answer, person.name);
 
             return (
               <div
                 key={person.id}
-                className={`rounded-2xl p-6 border-2 shadow-sm ${
-                  hasAnswered
-                    ? 'bg-emerald-50 border-green-400'
-                    : 'bg-white border-gray-300'
+                className={`rounded-2xl p-3 sm:p-6 border-2 shadow-sm transition-colors ${
+                  !hasAnswered
+                    ? 'bg-white border-gray-300'
+                    : correct
+                      ? 'bg-emerald-50 border-emerald-400'
+                      : 'bg-red-50 border-red-300'
                 }`}
               >
                 <div className="relative w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-lg ring-2 ring-gray-200">
@@ -281,23 +296,55 @@ export default function FaceNameGame({ difficulty, onComplete }: FaceNameGamePro
                 </div>
 
                 {!hasAnswered ? (
-                  <form onSubmit={(e) => {
-                    e.preventDefault();
-                    const input = (e.target as HTMLFormElement).querySelector('input') as HTMLInputElement;
-                    handleSubmitAnswer(person.id, input.value);
-                  }}>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const name = new FormData(e.currentTarget).get('name');
+                      handleSubmitAnswer(person.id, typeof name === 'string' ? name : '');
+                    }}
+                    className="space-y-2"
+                  >
                     <input
                       type="text"
-                      className="w-full px-4 py-2 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-sm font-bold text-center"
+                      name="name"
+                      aria-label={`Name of the person with ${person.feature.toLowerCase()}`}
+                      autoComplete="off"
+                      autoCapitalize="words"
+                      spellCheck={false}
+                      className="w-full min-h-[44px] px-3 rounded-xl border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-sm font-bold text-center"
                       placeholder="Name?"
                     />
-                  </form>
-                ) : (
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-green-700 mb-2">
-                      {userAnswers[person.id]}
+                    <div className="flex gap-1.5">
+                      <button
+                        type="submit"
+                        className="flex-1 min-h-[40px] rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
+                      >
+                        Check
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSubmitAnswer(person.id, '', true)}
+                        className="min-h-[40px] px-2.5 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+                      >
+                        Skip
+                      </button>
                     </div>
-                    <div className="text-3xl">✅</div>
+                  </form>
+                ) : correct ? (
+                  <div className="text-center animate-fade-up">
+                    <div className="text-2xl mb-1" aria-hidden="true">✅</div>
+                    <div className="text-lg font-bold text-emerald-700">{person.name}</div>
+                    <div className="text-xs font-semibold text-emerald-600">Correct!</div>
+                  </div>
+                ) : (
+                  <div className="text-center animate-fade-up">
+                    <div className="text-2xl mb-1" aria-hidden="true">❌</div>
+                    <div className="text-sm text-red-600 line-through break-words">
+                      {answer || 'Skipped'}
+                    </div>
+                    <div className="text-sm font-semibold text-slate-700">
+                      It&apos;s <span className="font-bold text-slate-900">{person.name}</span>
+                    </div>
                   </div>
                 )}
               </div>

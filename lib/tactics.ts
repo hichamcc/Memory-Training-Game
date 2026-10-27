@@ -66,7 +66,7 @@ export const tactics: Tactic[] = [
     difficulty: 'Beginner',
     bestFor: 'Short lists with specific positions, numbered items',
     steps: [
-      'First, memorize the rhyming pegs: 1=bun, 2=shoe, 3=tree, 4=door, 5=hive, 6=sticks, 7=heaven, 8=gate, 9=wine, 10=hen',
+      'First, memorize the rhyming pegs: 1=bun, 2=shoe, 3=tree, 4=door, 5=hive, 6=sticks, 7=heaven, 8=skate, 9=wine, 10=hen',
       'For each item to remember, create a clear image with the corresponding peg',
       'Make the interaction between the peg and item memorable',
       'To recall item #3, think of "tree" and see what\'s on it',

@@ -10,18 +10,19 @@ interface PegSystemGameProps {
   onComplete: (score: number, accuracy: number) => void;
 }
 
-// The classic peg system rhymes
+// The classic rhyming pegs. Each one rhymes with its number and is easy to
+// picture (8 uses "skate" rather than "gate", which has no clear image).
 const PEG_RHYMES = [
-  { number: 1, rhyme: 'Bun', icon: '🍔', color: 'from-yellow-400 to-orange-500' },
-  { number: 2, rhyme: 'Shoe', icon: '👟', color: 'from-blue-400 to-blue-600' },
-  { number: 3, rhyme: 'Tree', icon: '🌳', color: 'from-green-400 to-green-600' },
-  { number: 4, rhyme: 'Door', icon: '🚪', color: 'from-stone-400 to-stone-600' },
-  { number: 5, rhyme: 'Hive', icon: '🐝', color: 'from-yellow-400 to-yellow-600' },
-  { number: 6, rhyme: 'Sticks', icon: '🥢', color: 'from-amber-400 to-amber-600' },
-  { number: 7, rhyme: 'Heaven', icon: '☁️', color: 'from-sky-400 to-sky-600' },
-  { number: 8, rhyme: 'Gate', icon: '🚧', color: 'from-gray-400 to-gray-600' },
-  { number: 9, rhyme: 'Wine', icon: '🍷', color: 'from-lime-400 to-lime-600' },
-  { number: 10, rhyme: 'Hen', icon: '🐔', color: 'from-red-400 to-red-600' },
+  { number: 1, word: 'One', rhyme: 'Bun', icon: '🍔' },
+  { number: 2, word: 'Two', rhyme: 'Shoe', icon: '👟' },
+  { number: 3, word: 'Three', rhyme: 'Tree', icon: '🌳' },
+  { number: 4, word: 'Four', rhyme: 'Door', icon: '🚪' },
+  { number: 5, word: 'Five', rhyme: 'Hive', icon: '🐝' },
+  { number: 6, word: 'Six', rhyme: 'Sticks', icon: '🥢' },
+  { number: 7, word: 'Seven', rhyme: 'Heaven', icon: '😇' },
+  { number: 8, word: 'Eight', rhyme: 'Skate', icon: '⛸️' },
+  { number: 9, word: 'Nine', rhyme: 'Wine', icon: '🍷' },
+  { number: 10, word: 'Ten', rhyme: 'Hen', icon: '🐔' },
 ];
 
 export default function PegSystemGame({ difficulty, onComplete }: PegSystemGameProps) {
@@ -32,6 +33,7 @@ export default function PegSystemGame({ difficulty, onComplete }: PegSystemGameP
   const [userAnswers, setUserAnswers] = useState<{ [key: number]: string }>({});
   const [askedPegs, setAskedPegs] = useState<number[]>([]);
   const [currentAskedPeg, setCurrentAskedPeg] = useState<number | null>(null);
+  const [lastResult, setLastResult] = useState<{ peg: (typeof PEG_RHYMES)[number]; word: string; correct: boolean } | null>(null);
   const [timeLeft, setTimeLeft] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [score, setScore] = useState(0);
@@ -72,6 +74,7 @@ export default function PegSystemGame({ difficulty, onComplete }: PegSystemGameP
     setTimeLeft(memorizeTime);
     setStartTime(Date.now());
     setUserAnswers({});
+    setLastResult(null);
   };
 
   const generateAskedPegs = () => {
@@ -82,11 +85,20 @@ export default function PegSystemGame({ difficulty, onComplete }: PegSystemGameP
     setCurrentAskedPeg(shuffled[0]);
   };
 
-  const handleSubmitAnswer = (answer: string) => {
-    if (!answer.trim() || currentAskedPeg === null) return;
+  // An empty answer means the player skipped this peg
+  const handleSubmitAnswer = (answer: string, skipped = false) => {
+    if ((!skipped && !answer.trim()) || currentAskedPeg === null) return;
 
-    const newAnswers = { ...userAnswers, [currentAskedPeg]: answer.trim() };
+    const newAnswers = { ...userAnswers, [currentAskedPeg]: skipped ? '' : answer.trim() };
     setUserAnswers(newAnswers);
+
+    const pegIndex = pegs.findIndex(p => p.number === currentAskedPeg);
+    const expected = words[pegIndex];
+    setLastResult({
+      peg: pegs[pegIndex],
+      word: expected,
+      correct: !skipped && checkAnswer(answer, expected),
+    });
 
     const currentIndex = askedPegs.indexOf(currentAskedPeg);
     if (currentIndex < askedPegs.length - 1) {
@@ -198,30 +210,31 @@ export default function PegSystemGame({ difficulty, onComplete }: PegSystemGameP
           </span>
         </h2>
         <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto font-medium">
-          Memorize these rhyming pegs - you'll use them to remember your items!
+          Each number rhymes with a picture. Learn them once and you can use them forever.
         </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8 max-w-4xl mx-auto">
+        <ol className={`grid gap-2 sm:gap-3 mb-6 max-w-2xl mx-auto text-left ${pegs.length > 5 ? 'sm:grid-cols-2' : ''}`}>
           {pegs.map((peg) => (
-            <div
+            <li
               key={peg.number}
-              className={`bg-gradient-to-br ${peg.color} rounded-2xl p-6 shadow-sm border-2 border-white transition-transform`}
+              className="flex items-center gap-3 rounded-xl bg-white border border-slate-200 px-3 py-2.5 shadow-sm"
             >
-              <div className="text-5xl mb-3">{peg.icon}</div>
-              <div className="text-3xl font-bold text-white mb-1">{peg.number}</div>
-              <div className="text-lg font-bold text-white">{peg.rhyme}</div>
-            </div>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-base font-bold text-white tabular-nums">
+                {peg.number}
+              </span>
+              <span className="flex-1 text-lg text-slate-500">
+                {peg.word} <span aria-hidden="true" className="text-slate-300">→</span>
+                <span className="sr-only">rhymes with</span>{' '}
+                <span className="font-bold text-slate-900">{peg.rhyme}</span>
+              </span>
+              <span className="text-3xl" aria-hidden="true">{peg.icon}</span>
+            </li>
           ))}
-        </div>
+        </ol>
 
-        <div className="bg-white/60 backdrop-blur rounded-2xl p-6 max-w-2xl mx-auto border-2 border-blue-200 mb-8">
-          <p className="text-gray-800 font-bold text-lg mb-2">
-            ✨ Say them out loud: "One is Bun, Two is Shoe, Three is Tree..." ✨
-          </p>
-          <p className="text-gray-600 text-sm">
-            These pegs will help you remember items by position!
-          </p>
-        </div>
+        <p className="text-slate-600 text-sm max-w-2xl mx-auto mb-8">
+          <strong className="text-slate-800">Tip:</strong> say them out loud a couple of times: &quot;one is bun, two is shoe, three is tree…&quot;
+        </p>
 
         <button
           onClick={startMemorizing}
@@ -251,15 +264,16 @@ export default function PegSystemGame({ difficulty, onComplete }: PegSystemGameP
           </div>
         </div>
 
-        <div className={`bg-gradient-to-br ${currentPeg.color} rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-12 shadow-sm border-2 border-white/50 mb-8`}>
-          <div className="bg-white/90 backdrop-blur rounded-2xl p-4 sm:p-6 md:p-8 mb-6">
-            <div className="text-5xl sm:text-6xl md:text-7xl mb-4">{currentPeg.icon}</div>
-            <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-700 mb-2 break-words px-2">
-              {currentPeg.number} = {currentPeg.rhyme}
-            </div>
+        <div className="rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-200 p-6 sm:p-8 md:p-12 mb-8">
+          <div className="inline-flex items-center gap-3 rounded-full bg-white border border-slate-200 pl-2 pr-5 py-2 mb-8 shadow-sm">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
+              {currentPeg.number}
+            </span>
+            <span className="text-3xl" aria-hidden="true">{currentPeg.icon}</span>
+            <span className="text-lg font-bold text-slate-900">{currentPeg.rhyme}</span>
           </div>
 
-          <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-blue-600 mb-6 break-words px-2">
+          <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 break-words px-2">
             {currentWord}
           </div>
 
@@ -300,38 +314,68 @@ export default function PegSystemGame({ difficulty, onComplete }: PegSystemGameP
           </p>
         </div>
 
+        {lastResult && (
+          <div
+            key={lastResult.peg.number}
+            role="status"
+            className={`mb-4 rounded-xl px-4 py-3 text-center text-sm font-semibold animate-fade-up ${
+              lastResult.correct
+                ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                : 'bg-red-50 text-red-800 border border-red-200'
+            }`}
+          >
+            {lastResult.correct
+              ? `✅ Correct! ${lastResult.peg.rhyme} was holding "${lastResult.word}".`
+              : `❌ ${lastResult.peg.rhyme} was holding "${lastResult.word}".`}
+          </div>
+        )}
+
         {currentPeg && (
-          <div className={`bg-gradient-to-br ${currentPeg.color} rounded-3xl p-8 shadow-sm border-2 border-white mb-8`}>
-            <div className="bg-white/90 backdrop-blur rounded-2xl p-8 mb-6 text-center">
-              <div className="text-7xl mb-4">{currentPeg.icon}</div>
-              <div className="text-4xl font-bold text-gray-900 mb-2">
+          <div className="rounded-3xl bg-slate-50 border border-slate-200 p-5 sm:p-8 mb-8">
+            <div className="text-center mb-6">
+              <div className="text-6xl sm:text-7xl mb-3" aria-hidden="true">{currentPeg.icon}</div>
+              <div className="text-3xl sm:text-4xl font-bold text-slate-900">
                 {currentPeg.number} = {currentPeg.rhyme}
               </div>
-              <p className="text-gray-600 font-semibold mt-4">
-                What word did you link to this peg?
+              <p className="text-slate-600 font-semibold mt-3">
+                What word did you link to the {currentPeg.rhyme.toLowerCase()}?
               </p>
             </div>
 
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              const input = (e.target as HTMLFormElement).querySelector('input') as HTMLInputElement;
-              handleSubmitAnswer(input.value);
-              input.value = '';
-            }}>
+            <form
+              key={currentPeg.number}
+              onSubmit={(e) => {
+                e.preventDefault();
+                const answer = new FormData(e.currentTarget).get('answer');
+                handleSubmitAnswer(typeof answer === 'string' ? answer : '');
+              }}
+            >
               <div className="flex gap-2 sm:gap-3">
                 <input
                   type="text"
-                  className="flex-1 px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 rounded-full border-2 border-white focus:border-amber-200 focus:outline-none text-base sm:text-lg font-bold shadow-lg bg-white"
-                  placeholder="Type the word... 💭"
+                  name="answer"
+                  aria-label={`Word linked to peg ${currentPeg.number}, ${currentPeg.rhyme}`}
+                  autoComplete="off"
+                  autoCapitalize="none"
+                  spellCheck={false}
+                  className="flex-1 min-w-0 min-h-[52px] px-4 sm:px-6 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:outline-none text-base sm:text-lg font-bold bg-white"
+                  placeholder="Type the word…"
                   autoFocus
                 />
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-5 sm:px-7 md:px-10 py-3 sm:py-4 md:py-5 rounded-full font-bold text-sm sm:text-base hover:bg-blue-700 transition-all shadow-sm whitespace-nowrap"
+                  className="min-h-[52px] bg-blue-600 text-white px-5 sm:px-8 rounded-xl font-bold text-sm sm:text-base hover:bg-blue-700 transition-colors whitespace-nowrap"
                 >
-                  ✓ Submit
+                  Check
                 </button>
               </div>
+              <button
+                type="button"
+                onClick={() => handleSubmitAnswer('', true)}
+                className="mt-2 w-full min-h-[44px] text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors"
+              >
+                I don&apos;t remember, skip this one
+              </button>
             </form>
           </div>
         )}

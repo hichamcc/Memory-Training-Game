@@ -1,7 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+
+// Dispatch this on window to open the modal from anywhere (e.g. the header link)
+export const OPEN_FEEDBACK_EVENT = 'memory-game-open-feedback';
 
 type Category = 'Bug' | 'Idea' | 'Other';
 type Status = 'idle' | 'sending' | 'sent' | 'error';
@@ -24,11 +27,11 @@ export default function FeedbackButton() {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
-    const trigger = triggerRef.current;
+    // Return focus to whichever control opened the modal
+    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     textareaRef.current?.focus();
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsOpen(false);
@@ -54,6 +57,13 @@ export default function FeedbackButton() {
   };
 
   const close = () => setIsOpen(false);
+
+  const onOpenRequest = useEffectEvent(() => open());
+  useEffect(() => {
+    const handler = () => onOpenRequest();
+    window.addEventListener(OPEN_FEEDBACK_EVENT, handler);
+    return () => window.removeEventListener(OPEN_FEEDBACK_EVENT, handler);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,7 +91,6 @@ export default function FeedbackButton() {
   return (
     <>
       <button
-        ref={triggerRef}
         type="button"
         onClick={open}
         className="fixed bottom-4 left-4 z-40 flex items-center gap-2 min-h-[44px] px-5 py-3 rounded-full bg-white text-slate-800 font-semibold shadow-xl border border-slate-200 hover:scale-105 hover:shadow-2xl transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400"
