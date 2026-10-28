@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Post, formatPostDate, getAllPosts, getPostBySlug } from '@/lib/blog';
-import { AUTHOR, SITE_NAME, SITE_URL } from '@/lib/site';
+import { AUTHOR, SHARE_IMAGE, SITE_NAME, SITE_URL } from '@/lib/site';
 import { getTacticById } from '@/lib/tactics';
 import PostCard from '@/components/PostCard';
 
@@ -21,11 +21,12 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return {};
   return {
-    title: `${post.title} - ${SITE_NAME}`,
+    title: post.title,
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
     authors: [{ name: AUTHOR.name, url: AUTHOR.url }],
     openGraph: {
+      siteName: SITE_NAME,
       title: post.title,
       description: post.description,
       type: 'article',
@@ -33,11 +34,13 @@ export async function generateMetadata({
       publishedTime: post.date,
       modifiedTime: post.updated ?? post.date,
       authors: [AUTHOR.url],
+      images: [SHARE_IMAGE],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: post.title,
       description: post.description,
+      images: [SHARE_IMAGE.url],
     },
   };
 }

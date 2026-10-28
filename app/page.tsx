@@ -5,6 +5,7 @@ import ProgressSummary from '@/components/ProgressSummary';
 import PostCard from '@/components/PostCard';
 import { FIRST_TACTIC_ID } from '@/lib/tactics';
 import { getAllPosts } from '@/lib/blog';
+import { AUTHOR, SITE_ALTERNATE_NAMES, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -28,15 +29,69 @@ const steps = [
   },
 ];
 
+const faqs = [
+  {
+    question: 'What is Memory Champions?',
+    answer:
+      'Memory Champions is a free website that teaches the memory techniques used in memory competitions, such as the memory palace, the Major System and the PAO system, and lets you practice each one with a short game.',
+  },
+  {
+    question: 'Is Memory Champions free?',
+    answer: 'Yes. Every guide and practice game is free, with no account needed. Your scores are saved in your browser.',
+  },
+  {
+    question: 'Where should I start?',
+    answer:
+      'Start with the Linking Method. It is the easiest technique to learn and the base for the others. Then try the daily challenge to build a habit.',
+  },
+];
+
+// Tells search engines the site's name (shown above results) and who runs it
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      alternateName: SITE_ALTERNATE_NAMES,
+      url: SITE_URL,
+      description: SITE_DESCRIPTION,
+      inLanguage: 'en',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/icon`,
+      founder: { '@type': 'Person', name: AUTHOR.name, url: AUTHOR.url },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    },
+  ],
+};
+
 export default function Home() {
   const latestPosts = getAllPosts().slice(0, 3);
 
   return (
     <div className="mx-auto max-w-6xl px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+      />
       {/* Hero */}
       <section className="py-14 sm:py-20 text-center">
         <p className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-700 ring-1 ring-inset ring-blue-200 mb-6">
-          8 techniques used by memory champions
+          Memory Champions · 8 techniques, free practice games
         </p>
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 mb-5">
           Train your memory
@@ -100,6 +155,18 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      <section aria-labelledby="about" className="mt-20 max-w-3xl">
+        <h2 id="about" className="text-2xl font-bold text-slate-900 mb-6">About Memory Champions</h2>
+        <dl className="space-y-6">
+          {faqs.map((faq) => (
+            <div key={faq.question}>
+              <dt className="font-semibold text-slate-900 mb-1.5">{faq.question}</dt>
+              <dd className="text-slate-600 leading-relaxed">{faq.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
     </div>
   );
 }

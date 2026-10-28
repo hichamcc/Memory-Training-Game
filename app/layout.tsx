@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import FeedbackButton from "@/components/FeedbackButton";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { AUTHOR, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,11 +19,34 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Memory Training Game - Learn Professional Memory Techniques",
-  description: "Train your memory using professional competition tactics including Memory Palace, PAO System, Linking Method and more.",
+  title: {
+    default: SITE_TITLE,
+    template: `%s - ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: AUTHOR.name, url: AUTHOR.url }],
+  creator: AUTHOR.name,
+  keywords: [
+    "Memory Champions",
+    "memory training game",
+    "memory techniques",
+    "memory palace",
+    "Major System",
+    "PAO system",
+    "how to improve memory",
+  ],
+  appleWebApp: { title: SITE_NAME },
   openGraph: {
     siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 

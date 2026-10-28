@@ -15,3 +15,13 @@ export const AUTHOR = {
   name: 'codebyhicham',
   url: 'https://www.codebyhicham.com',
 };
+
+// The full home page title; other pages get "<page> - Memory Champions"
+export const SITE_TITLE = `${SITE_NAME}: Free Memory Training Games & Techniques`;
+
+// Other ways people write the name, so searches for them still find the site
+export const SITE_ALTERNATE_NAMES = ['MemoryChampions', 'Memory Champions app', 'Memory Champions game'];
+
+// The share card from app/opengraph-image.tsx. Pages that set their own
+// openGraph replace the parent's, so they need to list it again.
+export const SHARE_IMAGE = { url: '/opengraph-image', width: 1200, height: 630, alt: `${SITE_NAME}: free memory training games and techniques` };
