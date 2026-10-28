@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { DifficultyLevel, GamePhase } from '@/types';
 import { calculateScore, saveHighScore, saveGameSession } from '@/lib/storage';
+import { decodeMajor, exampleFor, matchesNumber, soundsFor } from '@/lib/majorSystem';
 
 interface MajorSystemGameProps {
   difficulty: DifficultyLevel;
@@ -11,31 +12,18 @@ interface MajorSystemGameProps {
 
 // Major System digit-to-sound mappings
 const MAJOR_SYSTEM_MAP = [
-  { digit: 0, sounds: 's, z', examples: 'Sea, Zoo', color: 'from-blue-400 to-blue-600' },
+  { digit: 0, sounds: 's, z, soft c', examples: 'Sea, Zoo', color: 'from-blue-400 to-blue-600' },
   { digit: 1, sounds: 't, d', examples: 'Tea, Day', color: 'from-green-400 to-green-600' },
   { digit: 2, sounds: 'n', examples: 'Noah, New', color: 'from-yellow-400 to-yellow-600' },
   { digit: 3, sounds: 'm', examples: 'Ma, Moon', color: 'from-lime-400 to-lime-600' },
   { digit: 4, sounds: 'r', examples: 'Ray, Row', color: 'from-red-400 to-red-600' },
   { digit: 5, sounds: 'l', examples: 'Law, Owl', color: 'from-rose-400 to-rose-600' },
-  { digit: 6, sounds: 'sh, ch', examples: 'Shoe, Cheese', color: 'from-orange-400 to-orange-600' },
-  { digit: 7, sounds: 'k, g', examples: 'Key, Go', color: 'from-teal-400 to-teal-600' },
+  { digit: 6, sounds: 'j, sh, ch', examples: 'Shoe, Jaw', color: 'from-orange-400 to-orange-600' },
+  { digit: 7, sounds: 'k, hard c, g', examples: 'Key, Go', color: 'from-teal-400 to-teal-600' },
   { digit: 8, sounds: 'f, v', examples: 'Foe, Ivy', color: 'from-sky-400 to-sky-600' },
   { digit: 9, sounds: 'p, b', examples: 'Pie, Bee', color: 'from-cyan-400 to-cyan-600' },
 ];
 
-// Pre-made word suggestions for common 2-digit combinations
-const WORD_SUGGESTIONS: { [key: string]: string[] } = {
-  '12': ['tin', 'tuna', 'tone'],
-  '23': ['name', 'enemy', 'gnome'],
-  '34': ['mower', 'hammer', 'mare'],
-  '45': ['rail', 'roll', 'reel'],
-  '56': ['lash', 'leash', 'lush'],
-  '67': ['shake', 'chick', 'jog'],
-  '78': ['cave', 'coffee', 'wife'],
-  '89': ['fob', 'fab', 'vibe'],
-  '90': ['bus', 'base', 'boss'],
-  '21': ['net', 'nut', 'nod'],
-};
 
 export default function MajorSystemGame({ difficulty, onComplete }: MajorSystemGameProps) {
   const [phase, setPhase] = useState<GamePhase>('intro');
@@ -49,7 +37,8 @@ export default function MajorSystemGame({ difficulty, onComplete }: MajorSystemG
   const [correctRounds, setCorrectRounds] = useState(0);
   const [score, setScore] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
-  const [currentRoundCorrect, setCurrentRoundCorrect] = useState(false);
+  // Result of the current round, shown until the player moves on
+  const [feedback, setFeedback] = useState<{ correct: boolean; decoded: string; example: string } | null>(null);
 
   const config = {
     Beginner: { rounds: 3, digits: 2, thinkTime: 20 },
@@ -87,40 +76,33 @@ export default function MajorSystemGame({ difficulty, onComplete }: MajorSystemG
     setTimeLeft(thinkTime);
     setStartTime(Date.now());
     setUserWord('');
-    setCurrentRoundCorrect(false);
+    setFeedback(null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!userWord.trim()) return;
+    // Ignore repeat submits while the feedback for this round is showing
+    if (!userWord.trim() || feedback) return;
 
-    // Check if the word matches the number
-    const isCorrect = validateWord(userWord, targetNumber);
-    setCurrentRoundCorrect(isCorrect);
-
-    if (isCorrect) {
-      setCorrectRounds(correctRounds + 1);
-    }
-
-    const newRoundsCompleted = roundsCompleted + 1;
-    setRoundsCompleted(newRoundsCompleted);
-
-    if (newRoundsCompleted >= totalRounds) {
-      finishGame(isCorrect ? correctRounds + 1 : correctRounds, totalRounds);
-    } else {
-      // Next round after showing feedback
-      setTimeout(() => {
-        setPhase('memorize');
-        setShowingSystem(false);
-        startRound();
-      }, 2000);
-    }
+    const correct = matchesNumber(userWord, targetNumber);
+    const readings = decodeMajor(userWord);
+    setFeedback({
+      correct,
+      // Show the reading closest to the target, so a near miss is easy to spot
+      decoded: correct ? targetNumber : readings.find((r) => r.length === targetNumber.length) ?? readings[0],
+      example: exampleFor(targetNumber),
+    });
+    if (correct) setCorrectRounds(correctRounds + 1);
+    setRoundsCompleted(roundsCompleted + 1);
   };
 
-  const validateWord = (word: string, number: string): boolean => {
-    // Simplified validation: just check if it's a real attempt
-    // In a real implementation, we'd check phonetic matching
-    return word.trim().length >= number.length;
+  const goToNextRound = () => {
+    if (roundsCompleted >= totalRounds) {
+      finishGame(correctRounds, totalRounds);
+    } else {
+      setPhase('memorize');
+      startRound();
+    }
   };
 
   const finishGame = (correct: number, total: number) => {
@@ -253,7 +235,6 @@ export default function MajorSystemGame({ difficulty, onComplete }: MajorSystemG
   }
 
   if (phase === 'memorize' && !showingSystem) {
-    const suggestions = WORD_SUGGESTIONS[targetNumber] || [];
 
     return (
       <div className="text-center relative z-10">
@@ -291,18 +272,9 @@ export default function MajorSystemGame({ difficulty, onComplete }: MajorSystemG
           </div>
         </div>
 
-        {suggestions.length > 0 && (
-          <div className="bg-green-100 rounded-2xl p-6 max-w-2xl mx-auto border-2 border-green-300 mb-6">
-            <p className="text-gray-700 font-bold text-sm mb-2">💡 Example words:</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {suggestions.map((word, index) => (
-                <span key={index} className="bg-white px-4 py-2 rounded-full font-bold text-sm">
-                  {word}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
+        <p className="text-sm text-slate-500 max-w-md mx-auto">
+          Add any vowels you like (and w, h, y): they don&apos;t count. Longer numbers can be two words, like &quot;moon tea&quot; for 321.
+        </p>
       </div>
     );
   }
@@ -321,36 +293,79 @@ export default function MajorSystemGame({ difficulty, onComplete }: MajorSystemG
           <div className="text-xs sm:text-sm font-bold text-gray-700 mb-2">The number was:</div>
           <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4 md:mb-6 break-all">{targetNumber}</div>
 
-          {currentRoundCorrect !== null && roundsCompleted < totalRounds && (
-            <div className={`p-4 rounded-xl mb-4 ${currentRoundCorrect ? 'bg-green-500' : 'bg-orange-500'}`}>
-              <div className="text-white font-bold">
-                {currentRoundCorrect ? '✓ Nice! Moving to next round...' : '→ Next round coming...'}
+          {feedback ? (
+            <div role="status" className="animate-fade-up">
+              <div
+                className={`rounded-2xl border-2 p-5 mb-4 text-left ${
+                  feedback.correct ? 'bg-emerald-50 border-emerald-300' : 'bg-red-50 border-red-300'
+                }`}
+              >
+                <p className={`font-bold text-lg mb-2 ${feedback.correct ? 'text-emerald-800' : 'text-red-800'}`}>
+                  {feedback.correct ? '✅ Correct!' : '❌ Not quite'}
+                </p>
+                <p className="text-slate-800">
+                  <span className="font-bold">&ldquo;{userWord.trim()}&rdquo;</span> sounds like{' '}
+                  <span className="font-semibold">{feedback.decoded ? soundsFor(feedback.decoded) : 'no counted sounds'}</span>
+                  {feedback.decoded && (
+                    <>
+                      {' '}= <span className="font-bold tabular-nums">{feedback.decoded}</span>
+                    </>
+                  )}
+                  {!feedback.correct && (
+                    <>
+                      , but {targetNumber} needs <span className="font-semibold">{soundsFor(targetNumber)}</span>.
+                    </>
+                  )}
+                </p>
+                {!feedback.correct && feedback.example && (
+                  <p className="text-slate-700 mt-2">
+                    Example: <span className="font-bold">{feedback.example}</span>
+                  </p>
+                )}
               </div>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">
-                Type a word using those sounds:
-              </label>
-              <input
-                type="text"
-                value={userWord}
-                onChange={(e) => setUserWord(e.target.value)}
-                className="w-full px-6 py-4 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-xl font-bold text-center"
-                placeholder="Your word..."
+              <button
+                type="button"
+                onClick={goToNextRound}
                 autoFocus
-              />
+                className="w-full min-h-[52px] bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-colors"
+              >
+                {roundsCompleted >= totalRounds ? 'See results' : 'Next number →'}
+              </button>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label htmlFor="major-word" className="block text-gray-700 font-bold mb-2">
+                  Type a word using those sounds:
+                </label>
+                <input
+                  id="major-word"
+                  type="text"
+                  autoComplete="off"
+                  autoCapitalize="none"
+                  spellCheck={false}
+                  value={userWord}
+                  onChange={(e) => setUserWord(e.target.value)}
+                  className="w-full px-6 py-4 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-xl font-bold text-center"
+                  placeholder="Your word..."
+                  autoFocus
+                />
+                {userWord.trim() && (
+                  <p className="mt-2 text-sm text-slate-500 text-center" aria-live="polite">
+                    Sounds so far: <span className="font-semibold text-slate-700">{soundsFor(decodeMajor(userWord)[0]) || '—'}</span>
+                  </p>
+                )}
+              </div>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 md:py-4 rounded-full font-bold text-base sm:text-lg md:text-xl hover:bg-blue-700 transition-all shadow-sm"
-            >
-              ✓ Submit Word
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={!userWord.trim()}
+                className="w-full bg-blue-600 text-white px-8 sm:px-10 md:px-12 py-3.5 sm:py-4 md:py-4 rounded-full font-bold text-base sm:text-lg md:text-xl hover:bg-blue-700 disabled:bg-slate-300 transition-all shadow-sm"
+              >
+                ✓ Check Word
+              </button>
+            </form>
+          )}
         </div>
       </div>
     );

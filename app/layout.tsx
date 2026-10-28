@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import FeedbackButton from "@/components/FeedbackButton";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,8 +18,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Memory Training Game - Learn Professional Memory Techniques",
   description: "Train your memory using professional competition tactics including Memory Palace, PAO System, Linking Method and more.",
+  openGraph: {
+    siteName: SITE_NAME,
+    type: "website",
+  },
 };
 
 export default function RootLayout({

@@ -2,6 +2,7 @@
 title: How to Build Your First Memory Palace
 description: The technique behind nearly every memory championship record, explained for complete beginners. All you need is a place you know well.
 date: 2026-10-26
+updated: 2026-10-28
 tactic: memory-palace
 ---
 
@@ -68,3 +69,21 @@ A big advantage over linking: if you forget one item, you don't lose the rest. J
 ## Practice it now
 
 The [Method of Loci practice game](/tactics/memory-palace/practice) gives you a ready-made house with rooms to place words in, then asks you to recall what you left in each room. Start on Beginner with five locations, then work your way up.
+
+## Frequently asked questions
+
+### Does the memory palace technique really work?
+
+Yes. It's one of the best-studied memory techniques. In a 2017 study published in *Neuron*, people with no prior training more than doubled their word-list recall after six weeks of short daily practice with it.
+
+### How many items can a memory palace hold?
+
+As many as you have locations. A small home easily gives 10 to 20 stops; competitors build palaces with hundreds of locations across many buildings and routes.
+
+### Can I use an imaginary place as a memory palace?
+
+You can, but real places you know well work better for beginners, because you don't have to work to remember the route itself.
+
+### What is the difference between a memory palace and the Method of Loci?
+
+None: they're two names for the same technique. "Loci" is Latin for "places".

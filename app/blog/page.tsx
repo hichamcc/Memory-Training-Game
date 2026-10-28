@@ -5,6 +5,7 @@ import PostCard from '@/components/PostCard';
 export const metadata: Metadata = {
   title: 'Blog - Memory Champions',
   description: 'Practical guides to memory techniques: memory palaces, the linking method, number systems and how to train them.',
+  alternates: { canonical: '/blog' },
 };
 
 export default function BlogPage() {

@@ -1,9 +1,14 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import LearningPath from '@/components/LearningPath';
 import ProgressSummary from '@/components/ProgressSummary';
 import PostCard from '@/components/PostCard';
 import { FIRST_TACTIC_ID } from '@/lib/tactics';
 import { getAllPosts } from '@/lib/blog';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 const steps = [
   {

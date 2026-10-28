@@ -4,6 +4,7 @@ import DailyChallenge from '@/components/DailyChallenge';
 export const metadata: Metadata = {
   title: 'Daily Challenge - Memory Champions',
   description: 'One quick memory challenge a day, the same words for everyone. Build your streak and share your score.',
+  alternates: { canonical: '/daily' },
 };
 
 export default function DailyPage() {

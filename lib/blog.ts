@@ -7,8 +7,12 @@ import { marked } from 'marked';
 // title: ...
 // description: ...   (used in the post list and for SEO)
 // date: YYYY-MM-DD
+// updated: YYYY-MM-DD      (optional: last meaningful edit)
 // tactic: linking-method   (optional: adds a "practice this" card)
 // ---
+//
+// A "## Frequently asked questions" section with "### Question" headings is
+// turned into FAQ structured data automatically.
 const POSTS_DIR = path.join(process.cwd(), 'content', 'blog');
 
 export interface PostMeta {
@@ -16,12 +20,42 @@ export interface PostMeta {
   title: string;
   description: string;
   date: string;
+  updated?: string;
   tactic?: string;
   readingMinutes: number;
 }
 
+export interface Faq {
+  question: string;
+  answer: string;
+}
+
 export interface Post extends PostMeta {
   html: string;
+  faqs: Faq[];
+}
+
+// Strip Markdown syntax for plain-text answers in structured data
+function toPlainText(markdown: string): string {
+  return markdown
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[*_`>#]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractFaqs(body: string): Faq[] {
+  const section = body.split(/^## Frequently asked questions\s*$/im)[1];
+  if (!section) return [];
+  const untilNextSection = section.split(/^## /m)[0];
+  return untilNextSection
+    .split(/^### /m)
+    .slice(1)
+    .map((block) => {
+      const [question, ...answer] = block.split('\n');
+      return { question: question.trim(), answer: toPlainText(answer.join('\n')) };
+    })
+    .filter((faq) => faq.question && faq.answer);
 }
 
 function parseFrontmatter(source: string): { data: Record<string, string>; body: string } {
@@ -55,6 +89,7 @@ function readPost(slug: string): { meta: PostMeta; body: string } | null {
       title: data.title,
       description: data.description ?? '',
       date: data.date,
+      updated: data.updated || undefined,
       tactic: data.tactic || undefined,
       readingMinutes: Math.max(1, Math.round(words / 220)),
     },
@@ -77,7 +112,11 @@ export function getPostBySlug(slug: string): Post | null {
   if (!/^[a-z0-9-]+$/.test(slug)) return null;
   const post = readPost(slug);
   if (!post) return null;
-  return { ...post.meta, html: marked.parse(post.body, { async: false }) };
+  return {
+    ...post.meta,
+    html: marked.parse(post.body, { async: false }),
+    faqs: extractFaqs(post.body),
+  };
 }
 
 export function formatPostDate(date: string): string {

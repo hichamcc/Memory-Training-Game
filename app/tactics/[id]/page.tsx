@@ -1,7 +1,26 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getTacticById, getNextTactic } from '@/lib/tactics';
+import { SITE_NAME } from '@/lib/site';
 import DifficultyBadge from '@/components/DifficultyBadge';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const tactic = getTacticById(id);
+  if (!tactic) return {};
+  const description = `${tactic.shortDescription}. Step-by-step guide, examples and tips, plus a free practice game. Best for: ${tactic.bestFor.toLowerCase()}.`;
+  return {
+    title: `${tactic.name}: How It Works, Examples & Practice - ${SITE_NAME}`,
+    description,
+    alternates: { canonical: `/tactics/${tactic.id}` },
+    openGraph: { title: `${tactic.name}: how it works and how to practice it`, description, url: `/tactics/${tactic.id}` },
+  };
+}
 
 export default async function TacticDetailPage({
   params,

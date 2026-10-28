@@ -2,6 +2,7 @@
 title: The Linking Method: Remember Any List in 5 Minutes
 description: The easiest memory technique to learn, step by step. Turn a boring list into a ridiculous story you can't forget.
 date: 2026-10-26
+updated: 2026-10-28
 tactic: linking-method
 ---
 
@@ -53,3 +54,17 @@ The Linking Method works best for short lists where order matters: a shopping li
 ## Practice it now
 
 Like any skill, this gets easier with practice. Start with five words and build up from there. The [Linking Method practice game](/tactics/linking-method/practice) shows you words one at a time and then asks you to recall them in order, which is exactly the skill you're training. Once you're comfortable, try the [daily challenge](/daily) and see how you compare tomorrow.
+
+## Frequently asked questions
+
+### What is the linking method?
+
+The linking method (or story method) is a memory technique where you connect each item in a list to the next with a vivid, absurd mental image, creating a chain you can follow from start to finish.
+
+### Is the linking method the same as the story method?
+
+They're very close. The linking method joins items in pairs (A with B, then B with C); the story method weaves them into one continuous story. Both rely on vivid, unusual images.
+
+### How many items can you remember with the linking method?
+
+Most beginners can link 10 to 20 items reliably after a little practice. For longer lists, a memory palace is safer, because one forgotten link doesn't break the whole chain.

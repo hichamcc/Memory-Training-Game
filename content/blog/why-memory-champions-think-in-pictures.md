@@ -2,6 +2,7 @@
 title: Memory Champions Aren't Born Different. They Think in Pictures.
 description: What research on memory athletes shows, and why turning information into images is the skill behind every technique on this site.
 date: 2026-10-26
+updated: 2026-10-28
 tactic: linking-method
 ---
 
@@ -40,3 +41,17 @@ You don't need hours a day. Short, regular practice works better than occasional
 4. **Raise the difficulty when it feels easy.** More items and less time force your images to become quicker and sharper.
 
 The first few attempts can feel slow and awkward. That's normal: you're learning to think in a new way. Most people notice a real difference within a week.
+
+## Frequently asked questions
+
+### Do memory champions have a photographic memory?
+
+No. Studies of top memory competitors found normal intelligence and normal brain structure. They rely on learned techniques like the memory palace, not on a special kind of memory.
+
+### What is the picture superiority effect?
+
+It's the finding that people remember pictures better than words. Memory techniques use it by converting words, names and numbers into vivid mental images.
+
+### Can anyone learn to memorize like a champion?
+
+The core techniques, yes. Reaching competition level takes a lot of practice, but most people see a big improvement within a few weeks of short daily training.
