@@ -331,13 +331,13 @@ export default function MemoryPalaceGame({ difficulty, onComplete }: MemoryPalac
           {isGreat ? 'You\'re a memory palace master! 🏛️' : isGood ? 'Nice work! Your palace is growing! ⭐' : 'Keep building your palace! 🌟'}
         </p>
 
-        <div className="grid grid-cols-2 gap-6 mb-8">
-          <div className="bg-blue-50 rounded-3xl p-8 shadow-sm border-2 border-blue-300 transition-transform">
-            <div className="text-6xl font-bold text-blue-600 mb-3">{score}</div>
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 mb-8">
+          <div className="bg-blue-50 rounded-3xl p-5 sm:p-8 shadow-sm border-2 border-blue-300 transition-transform">
+            <div className="text-4xl sm:text-6xl font-bold text-blue-600 mb-3 tabular-nums">{score}</div>
             <div className="text-gray-800 font-bold text-lg">🎯 Score</div>
           </div>
-          <div className="bg-emerald-50 rounded-3xl p-8 shadow-sm border-2 border-green-300 transition-transform">
-            <div className="text-6xl font-bold text-emerald-600 mb-3">{accuracy}%</div>
+          <div className="bg-emerald-50 rounded-3xl p-5 sm:p-8 shadow-sm border-2 border-green-300 transition-transform">
+            <div className="text-4xl sm:text-6xl font-bold text-emerald-600 mb-3 tabular-nums">{accuracy}%</div>
             <div className="text-gray-800 font-bold text-lg">✓ Accuracy</div>
           </div>
         </div>

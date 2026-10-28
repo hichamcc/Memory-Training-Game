@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { DifficultyLevel, GamePhase } from '@/types';
 import { calculateScore, saveHighScore, saveGameSession } from '@/lib/storage';
+import { normalizeDigits } from '@/lib/gameLogic';
 
 interface PAOSystemGameProps {
   difficulty: DifficultyLevel;
@@ -100,7 +101,7 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
     if (!userAnswer.trim()) return;
 
     // Simple validation - just check if they typed the number
-    const cleanedAnswer = userAnswer.replace(/\s/g, '');
+    const cleanedAnswer = normalizeDigits(userAnswer);
     const isCorrect = cleanedAnswer === targetSequence;
 
     if (isCorrect) {
@@ -318,6 +319,8 @@ export default function PAOSystemGame({ difficulty, onComplete }: PAOSystemGameP
             </label>
             <input
               type="text"
+              inputMode="numeric"
+              autoComplete="off"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               className="w-full px-6 py-4 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-3xl font-bold text-center tracking-widest"

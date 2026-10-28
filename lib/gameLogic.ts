@@ -61,6 +61,29 @@ export function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
+// First code point (the "0") of each digit set a phone keyboard might produce:
+// Arabic-Indic, Persian, Devanagari, Bengali and full-width
+const DIGIT_ZEROS = [0x0660, 0x06f0, 0x0966, 0x09e6, 0xff10];
+
+/**
+ * Reduce a typed number to plain ASCII digits so "123.456", "123 456",
+ * "١٢٣٤٥٦" and "１２３４５６" all compare equal to "123456".
+ */
+export function normalizeDigits(input: string): string {
+  let digits = '';
+  for (const char of input) {
+    const code = char.codePointAt(0) ?? 0;
+    if (code >= 0x30 && code <= 0x39) {
+      digits += char;
+      continue;
+    }
+    const zero = DIGIT_ZEROS.find((z) => code >= z && code <= z + 9);
+    if (zero !== undefined) digits += String(code - zero);
+    // Anything else (spaces, dots, dashes, commas) is separator noise
+  }
+  return digits;
+}
+
 export function normalizeAnswer(answer: string): string {
   return answer.toLowerCase().trim();
 }

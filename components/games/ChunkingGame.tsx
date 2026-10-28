@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { DifficultyLevel, GamePhase } from '@/types';
 import { calculateScore, saveHighScore, saveGameSession } from '@/lib/storage';
+import { normalizeDigits } from '@/lib/gameLogic';
 
 interface ChunkingGameProps {
   difficulty: DifficultyLevel;
@@ -76,8 +77,7 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
     const endTime = Date.now();
     const timeElapsed = Math.floor((endTime - startTime) / 1000);
 
-    // Remove any spaces or dashes from user answer
-    const cleanedAnswer = userAnswer.replace(/[\s-]/g, '');
+    const cleanedAnswer = normalizeDigits(userAnswer);
 
     // Calculate how many digits are correct
     let correctDigits = 0;
@@ -240,14 +240,24 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
             </label>
             <input
               type="text"
+              inputMode="numeric"
+              autoComplete="off"
+              autoCorrect="off"
+              spellCheck={false}
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               className="w-full px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-lg sm:text-xl md:text-2xl font-bold text-center shadow-lg bg-white tracking-widest"
               placeholder="123 456 789"
               autoFocus
             />
-            <p className="text-gray-600 text-xs sm:text-sm mt-4 text-center">
-              Type {sequenceLength} digits (spaces and dashes are optional)
+            <p
+              aria-live="polite"
+              className={`text-xs sm:text-sm mt-4 text-center font-semibold ${
+                normalizeDigits(userAnswer).length === sequenceLength ? 'text-emerald-600' : 'text-gray-600'
+              }`}
+            >
+              {normalizeDigits(userAnswer).length} / {sequenceLength} digits
+              <span className="font-normal text-gray-500"> · spaces, dots and dashes are ignored</span>
             </p>
           </div>
 
@@ -269,7 +279,8 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
   }
 
   if (phase === 'results') {
-    const cleanedUserAnswer = userAnswer.replace(/[\s-]/g, '');
+    const cleanedUserAnswer = normalizeDigits(userAnswer);
+    const userChunks = chunkSequence(cleanedUserAnswer, chunkSize);
     const isGreat = accuracy >= 80;
     const isGood = accuracy >= 60;
 
@@ -294,13 +305,13 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
           {isGreat ? 'You\'re a chunking master! 🧩' : isGood ? 'Your chunking skills are growing! ⭐' : 'Keep practicing those chunks! 🌟'}
         </p>
 
-        <div className="grid grid-cols-2 gap-6 mb-8">
-          <div className="bg-blue-50 rounded-3xl p-8 shadow-sm border-2 border-blue-300 transition-transform">
-            <div className="text-6xl font-bold text-blue-600 mb-3">{score}</div>
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 mb-8">
+          <div className="bg-blue-50 rounded-3xl p-5 sm:p-8 shadow-sm border-2 border-blue-300 transition-transform">
+            <div className="text-4xl sm:text-6xl font-bold text-blue-600 mb-3 tabular-nums">{score}</div>
             <div className="text-gray-800 font-bold text-lg">🎯 Score</div>
           </div>
-          <div className="bg-emerald-50 rounded-3xl p-8 shadow-sm border-2 border-green-300 transition-transform">
-            <div className="text-6xl font-bold text-emerald-600 mb-3">{accuracy}%</div>
+          <div className="bg-emerald-50 rounded-3xl p-5 sm:p-8 shadow-sm border-2 border-green-300 transition-transform">
+            <div className="text-4xl sm:text-6xl font-bold text-emerald-600 mb-3 tabular-nums">{accuracy}%</div>
             <div className="text-gray-800 font-bold text-lg">✓ Accuracy</div>
           </div>
         </div>
@@ -326,23 +337,34 @@ export default function ChunkingGame({ difficulty, onComplete }: ChunkingGamePro
             <div className="text-sm font-bold text-gray-600 mb-3">Your Answer:</div>
             <div className="bg-white rounded-2xl p-4 shadow-inner">
               <div className="text-3xl font-bold tracking-wider text-gray-900">
-                {cleanedUserAnswer || '(nothing)'}
+                {userChunks.length > 0 ? userChunks.join(' ') : '(nothing)'}
               </div>
             </div>
           </div>
 
-          <div className="text-sm font-bold text-gray-600 mb-3">Detailed Comparison:</div>
-          <div className="flex flex-wrap justify-center gap-2">
-            {comparison.map((item, index) => (
-              <div
-                key={index}
-                className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl font-bold shadow-md ${
-                  item.isCorrect
-                    ? 'bg-green-500 text-white'
-                    : 'bg-red-500 text-white'
-                }`}
-              >
-                {item.user || '?'}
+          <div className="text-sm font-bold text-gray-600 mb-1">Detailed Comparison:</div>
+          <p className="text-xs text-gray-500 mb-3">Red boxes show what you typed, with the correct digit underneath.</p>
+          {/* One group per chunk so a chunk never wraps across lines */}
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+            {chunks.map((chunk, chunkIndex) => (
+              <div key={chunkIndex} className="flex gap-1">
+                {comparison.slice(chunkIndex * chunkSize, chunkIndex * chunkSize + chunk.length).map((item, i) => {
+                  const position = chunkIndex * chunkSize + i + 1;
+                  return (
+                    <div
+                      key={position}
+                      aria-label={item.isCorrect ? `Digit ${position}: ${item.correct}, correct` : `Digit ${position}: you typed ${item.user || 'nothing'}, correct is ${item.correct}`}
+                      className={`w-9 sm:w-11 rounded-lg flex flex-col items-center justify-center py-1.5 font-bold text-white ${
+                        item.isCorrect ? 'bg-green-500' : 'bg-red-500'
+                      }`}
+                    >
+                      <span className="text-lg sm:text-xl leading-tight">{item.user || '–'}</span>
+                      {!item.isCorrect && (
+                        <span className="text-xs leading-tight text-red-100">{item.correct}</span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>

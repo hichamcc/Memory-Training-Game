@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { DifficultyLevel, GamePhase } from '@/types';
 import { calculateScore, saveHighScore, saveGameSession } from '@/lib/storage';
+import { normalizeDigits } from '@/lib/gameLogic';
 
 interface DominicSystemGameProps {
   difficulty: DifficultyLevel;
@@ -106,7 +107,7 @@ export default function DominicSystemGame({ difficulty, onComplete }: DominicSys
     e.preventDefault();
     if (!currentAnswer.trim()) return;
 
-    const newAnswers = [...userAnswers, currentAnswer.replace(/\s/g, '')];
+    const newAnswers = [...userAnswers, normalizeDigits(currentAnswer)];
     setUserAnswers(newAnswers);
     setCurrentAnswer('');
 
@@ -337,6 +338,8 @@ export default function DominicSystemGame({ difficulty, onComplete }: DominicSys
             </label>
             <input
               type="text"
+              inputMode="numeric"
+              autoComplete="off"
               value={currentAnswer}
               onChange={(e) => setCurrentAnswer(e.target.value)}
               className="w-full px-8 py-6 rounded-full border-2 border-blue-300 focus:border-blue-500 focus:outline-none text-2xl font-bold text-center shadow-lg bg-white tracking-widest"
@@ -395,13 +398,13 @@ export default function DominicSystemGame({ difficulty, onComplete }: DominicSys
           {isGreat ? 'You\'re a Dominic System expert! 🏆' : isGood ? 'Your memory acting skills are growing! ⭐' : 'Keep practicing those scenes! 🌟'}
         </p>
 
-        <div className="grid grid-cols-2 gap-6 mb-8">
-          <div className="bg-blue-50 rounded-3xl p-8 shadow-sm border-2 border-blue-300 transition-transform">
-            <div className="text-6xl font-bold text-blue-600 mb-3">{score}</div>
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 mb-8">
+          <div className="bg-blue-50 rounded-3xl p-5 sm:p-8 shadow-sm border-2 border-blue-300 transition-transform">
+            <div className="text-4xl sm:text-6xl font-bold text-blue-600 mb-3 tabular-nums">{score}</div>
             <div className="text-gray-800 font-bold text-lg">🎯 Score</div>
           </div>
-          <div className="bg-emerald-50 rounded-3xl p-8 shadow-sm border-2 border-green-300 transition-transform">
-            <div className="text-6xl font-bold text-emerald-600 mb-3">{accuracy}%</div>
+          <div className="bg-emerald-50 rounded-3xl p-5 sm:p-8 shadow-sm border-2 border-green-300 transition-transform">
+            <div className="text-4xl sm:text-6xl font-bold text-emerald-600 mb-3 tabular-nums">{accuracy}%</div>
             <div className="text-gray-800 font-bold text-lg">✓ Accuracy</div>
           </div>
         </div>
