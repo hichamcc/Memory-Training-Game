@@ -24,6 +24,7 @@ export function GET() {
     '',
     '## Optional',
     '',
+    `- [All games](${SITE_URL}/games): every practice game on one page`,
     `- [Daily challenge](${SITE_URL}/daily): memorize 8 words, the same for everyone each day`,
     '',
   ].join('\n');

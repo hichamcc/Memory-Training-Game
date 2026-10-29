@@ -252,6 +252,18 @@ export const LEARNING_PATH: { level: Tactic['difficulty']; title: string; subtit
   },
 ];
 
+// What each practice game asks you to do, for the games list
+export const GAME_DESCRIPTIONS: Record<string, string> = {
+  'linking-method': 'Memorize a list of words, then type them back in order.',
+  'peg-system': 'Hang items on rhyming pegs, then say which item is on each peg.',
+  'chunking': 'Split a long number into chunks, then type it back from memory.',
+  'memory-palace': 'Place words in the rooms of a house, then recall what is in each room.',
+  'face-name': 'Meet new faces with their names, then name each face.',
+  'major-system': 'Turn numbers into words using their consonant sounds.',
+  'pao-system': 'Turn a long number into person-action-object scenes, then recall it.',
+  'dominic-system': 'Turn numbers into famous people doing actions, then recall them.',
+};
+
 export const FIRST_TACTIC_ID = LEARNING_PATH[0].ids[0];
 
 export function getNextTactic(id: string): Tactic | undefined {

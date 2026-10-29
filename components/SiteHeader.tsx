@@ -7,7 +7,7 @@ export default function SiteHeader() {
       <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-slate-900 min-h-[44px]">
           <span className="text-2xl" aria-hidden="true">🧠</span>
-          <span>Memory Champions</span>
+          <span className="whitespace-nowrap">Memory Champions</span>
         </Link>
         <nav className="flex items-center gap-1 sm:gap-2 text-sm font-semibold">
           <Link
@@ -17,8 +17,14 @@ export default function SiteHeader() {
             Techniques
           </Link>
           <Link
-            href="/blog"
+            href="/games"
             className="inline-flex items-center min-h-[44px] px-3 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+          >
+            Games
+          </Link>
+          <Link
+            href="/blog"
+            className="hidden sm:inline-flex items-center min-h-[44px] px-3 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
           >
             Blog
           </Link>
